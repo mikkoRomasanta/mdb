@@ -23,3 +23,4 @@ Route::get('empDataTable', 'EmployeeController@getEmployees')->name('dt.emp');
 
 Route::get('employees', 'EmployeeController@index');
 Route::post('employees', 'EmployeeController@update');
+Route::get('appDataTable', 'EmployeeController@getApps')->name('dt.app');

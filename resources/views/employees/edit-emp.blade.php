@@ -21,17 +21,13 @@
                         {{Form::text('last_name','',['id' => 'lnameBox', 'class' => 'col-md-8 form-control'])}}
                     </div>
                     <div class="form-group row">
-                        {{Form::label('app_gsis', 'GSIS',['class' => 'col-md-1 col-form-label', 'style' => 'font-weight: bold'])}}
-                        {{Form::checkbox('app_gsis',null,false,['id' => 'gsisXBox', 'class' => 'col-md-1 form-control'])}} <!-- intentional #id convention. -->
+                        <!-- App checkboxes Start-->
+                        @for($i=0;$i<count($apps);$i++) <!-- count $apps from index.blade.php-->
+                            {{Form::label($apps[$i],'',['class' => 'col-md-1 col-form-label', 'style' => 'font-weight: bold'])}}
+                            {{Form::checkbox('app['.$i.']',null,false,['id' => 'appBox'.$i, 'class' => 'col-md-1 form-control'])}}
+                        @endfor
+                        <!-- App checkboxes End-->
 
-                        {{Form::label('app_ldb', 'LDB',['class' => 'col-md-1 col-form-label', 'style' => 'font-weight: bold'])}}
-                        {{Form::checkbox('app_ldb',null,false,['id' => 'ldbXBox', 'class' => 'col-md-1 form-control'])}} <!-- intentional #id convention. -->
-
-                        {{Form::label('app_umdb', 'UMDB',['class' => 'col-md-1 col-form-label', 'style' => 'font-weight: bold'])}}
-                        {{Form::checkbox('app_umdb',null,false,['id' => 'umdbXBox', 'class' => 'col-md-1 form-control'])}} <!-- intentional #id convention. -->
-
-                        {{Form::label('app_vdb', 'VDB',['class' => 'col-md-1 col-form-label', 'style' => 'font-weight: bold'])}}
-                        {{Form::checkbox('app_vdb',null,false,['id' => 'vdbXBox', 'class' => 'col-md-1 form-control'])}} <!-- intentional #id convention. -->
                     </div>
                     <div class="form-group row">
                         <div class="col-md-9"></div>

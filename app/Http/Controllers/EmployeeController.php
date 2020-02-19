@@ -17,8 +17,8 @@ class EmployeeController extends Controller
     public function index()
     {
 
-        $apps = DB::table('apps')->orderBy('name','ASC')->get();
-        
+        $apps = DB::table('apps')->orderBy('name','ASC')->pluck('name');
+
         $data = [
             'apps' => $apps
         ];
@@ -82,36 +82,24 @@ class EmployeeController extends Controller
     public function update(Request $request)
     {
         $emp = Employee::where('emp_id', '=', $request->emp_id)->first();
+        $apps = DB::table('apps')->pluck('name'); //get all apps (add active? if needed)
+        $appCount = $apps->count(); //count # of apps
 
-        if(isset($request->app_gsis)){ //TODO: put checkboxes into an array + loop
-            $emp->gsis = '1';
-        }
-        else{
-            $emp->gsis = '0';
-        }
-        if(isset($request->app_ldb)){
-            $emp->ldb = '1';
-        }
-        else{
-            $emp->ldb = '0';
-        }
-        if(isset($request->app_umdb)){
-            $emp->umdb = '1';
-        }
-        else{
-            $emp->umdb = '0';
-        }
-        if(isset($request->app_vdb)){
-            $emp->vdb = '1';
-        }
-        else{
-            $emp->vdb = '0';
+        for($i=0;$i<$appCount;$i++){ //loop through all apps
+            $app = strtolower($apps[$i]); //lowercase the appname
+            
+            if(isset($request->app[$i])){ //if checkbox is on
+
+                $emp[$app] = 1; //basically same as $emp->appName = 1;
+            }
+            else{
+                $emp[$app] = 0;
+            }
         }
 
-        //Save updates
-        $emp->emp_id = $request->emp_id;
+        $emp->emp_id = $request->emp_id; //should we allow changing of emp_id? emp_id is unique in the database
         $emp->first_name = $request->first_name;
-        $emp->last_name = $request->last_name;
+        $emp->last_name = $request->last_name; //dept and other info not YET included.
 
         $emp->save();
 
@@ -135,6 +123,12 @@ class EmployeeController extends Controller
         $emp = Employee::get();
 
         return $emp->toJson();
+    }
+
+    public function getApps(){ //for Datatables
+        $apps = DB::table('apps')->orderBy('name','ASC')->pluck('name');
+
+        return $apps->toJson();
     }
 
 }
