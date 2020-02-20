@@ -17,7 +17,7 @@ class EmployeeController extends Controller
     public function index()
     {
 
-        $apps = DB::table('apps')->orderBy('name','ASC')->pluck('name');
+        $apps = App::pluckApps();
 
         $data = [
             'apps' => $apps
@@ -125,8 +125,8 @@ class EmployeeController extends Controller
         return $emp->toJson();
     }
 
-    public function getApps(){ //for Datatables
-        $apps = DB::table('apps')->orderBy('name','ASC')->pluck('name');
+    public function pluckApps(){ //for Datatables
+        $apps = App::pluckApps(); //custom function in App model
 
         return $apps->toJson();
     }

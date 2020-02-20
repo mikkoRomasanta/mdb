@@ -39,7 +39,7 @@
                             <a class="nav-link" href="/employees">Employees</a>
                         </li>
                         <li class="nav-link">
-                            <a class="nav-link" href="/employees">App List</a>
+                            <a class="nav-link" href="/apps">App List</a>
                         </li>
                     </ul>
 

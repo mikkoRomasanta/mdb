@@ -5,20 +5,21 @@
 <div class="container">
     <table class="table">
         <thead>
+            <-- TODO: CREATE SIDEBAR(for apps) HERE! // Make cards?
             <tr>
-                <th>App Name</th>
+                @foreach($apps as $app)
+                    <th>{{$app}}</th>
+                @endforeach
             </tr>
         </thead>
-        <tbody>
-            @foreach ($data as $emp)
-                <tr>
-                    <td>{{ $emp->emp_id }}</td>
-                    <td>{{ $emp->first_name }}</td>
-                    <td>{{ $emp->last_name }}</td>
-                </tr>
-            @endforeach
-        </tbody>
     </table>
-    {{ $data->links() }}
 
+    <button type="button" data-toggle="modal" data-target="#mdlCreateApp">
+        Create App
+    </button>
+
+@endsection
+
+@section('modal')
+    @include('applist.create-app-modal')
 @endsection

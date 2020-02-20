@@ -38,7 +38,7 @@
         var apps = []; // app list array from sql table 'apps'
 
         $.ajax({
-            url: "{{route('dt.app')}}", //get list
+            url: "{{route('pluck.app')}}", //get list
             type: 'get',
             dataType: 'JSON',
             success: function(response){
@@ -124,5 +124,5 @@
 @endpush
 
 @section('modal')
-    @include('employees.edit-emp')
+    @include('employees.edit-emp-modal')
 @endsection
