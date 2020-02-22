@@ -24,5 +24,7 @@ Route::get('empDataTable', 'EmployeeController@getEmployees')->name('dt.emp');
 Route::get('employees', 'EmployeeController@index');
 Route::post('employees', 'EmployeeController@update');
 Route::get('appDataTable', 'EmployeeController@pluckApps')->name('pluck.app');
+Route::get('change-password', 'EmployeeController@changePassword');
+Route::post('change-password', 'EmployeeController@changePass');
 
 Route::resource('apps', 'AppController');

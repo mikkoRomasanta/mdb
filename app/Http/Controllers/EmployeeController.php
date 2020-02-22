@@ -4,7 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Employee;
 use App\Models\App;
+use App\Rules\ConfirmOldPassword;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Auth;
 use DB;
 
 class EmployeeController extends Controller
@@ -129,6 +132,34 @@ class EmployeeController extends Controller
         $apps = App::pluckApps(); //custom function in App model
 
         return $apps->toJson();
+    }
+
+    public function changePassword(){
+        return view('employees.change-password');
+    }
+
+    public function changePass(Request $request){ // add limit on change pass? ex. once a month????????
+        $userAuth = Auth::user(); //get current logged-in user's info
+        $oldPassword = $userAuth->password; //get current logged-in user's password
+        $this->validate($request, [
+            'cur_password' => ['required', new ConfirmOldPassword($oldPassword)],
+            'new_password' => 'required|min:6|confirmed'
+        ]); //follow custom rule in App/Rules/ConfirmOldPassword
+
+        $curPassword = $request->input("cur_password"); //get current password from user input
+        $newPassword = $request->input('new_password'); //get new password from user input
+
+
+        $emp = Employee::where('emp_id', '=', $userAuth->emp_id)->first();
+        $emp->password = Hash::make($newPassword);
+        $emp->save();
+
+        // return response()->json(['result' => $newPassword.' '.$userId]);
+
+        Auth::logout();
+
+        $message = 'User ['.$userAuth->emp_id.'] updated successfully.';
+        return redirect('/login')->with('success', $message);
     }
 
 }
