@@ -1,8 +1,19 @@
-div.dataTables_wrapper {
+div.dataTables_wrapper{
     width: 1200px;
 }
 
-
 #empTable_length{
     padding-top: .755rem; //datatables
+}
+
+hr{
+    padding: 0px;
+    margin: 0px;    
+}
+
+.small-icon{
+    padding: 0.05rem 0.15rem;
+    font-size: 0.75rem;
+    line-height: 1.5;
+    border-radius: 0.2rem;
 }

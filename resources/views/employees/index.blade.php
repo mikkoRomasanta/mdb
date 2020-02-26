@@ -50,7 +50,7 @@
                 }
 
                 var builtColumns = [ //column template to be used in DT
-                    { "defaultContent": "<a href='#' class='btn btn-info btn-sm' id='editBtn'><i class='fas fa-edit fa-fw'></i></a>"},
+                    { "defaultContent": "<a href='#' class='btn btn-success btn-sm small-icon' id='editBtn' title='edit'><i class='fas fa-edit fa-fw'></i></a> <a href='#' class='btn btn-warning btn-sm small-icon' id='resetBtn' title='reset password'><i class='fas fa-undo-alt fa-fw'></i></a>"},
                     {'data' : 'emp_id'},
                     {'data' : 'first_name'},
                     {'data' : 'last_name'},
@@ -88,10 +88,11 @@
                             text: 'Add Users',
                             className: 'dt-middle-button',
                             action: function ( e, dt, node, config ) {
-                                $('#mdlEdit').modal('show')
+                                window.location = 'employees/add'
                             }
                         },
-                    ]
+                    ],
+                    orderBy: 1
                         
                 }); // end of DT
 
@@ -116,13 +117,22 @@
                         }
 
                     });
+
             } //success function end 
         }); //ajax end
 
     });
 </script>
+@if (count($errors) > 0)
+    <script>
+        $( document ).ready(function() {
+            $('#mdlAdd').modal('show');
+        });
+    </script>
+@endif
 @endpush
 
 @section('modal')
     @include('employees.edit-emp-modal')
+    {{-- @include('employees.add-emp-modal') --}}
 @endsection

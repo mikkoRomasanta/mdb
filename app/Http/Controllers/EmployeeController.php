@@ -12,22 +12,27 @@ use DB;
 
 class EmployeeController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
+        $user = Auth::user();
+        //using policy set at app>policies>EmployeePolicy
+        if($user->can('view', Employee::class)){ //if user is allowed to view then show employees.index
+            $apps = App::pluckApps();
 
-        $apps = App::pluckApps();
+            $data = [
+                'apps' => $apps
+            ];
 
-        $data = [
-            'apps' => $apps
-        ];
-
-
-        return view('employees.index')->with($data);
+            return view('employees.index')->with($data);
+        }else{
+            return response('Unauthorized access! FUCK OFF!');
+        }
 
         
     }
@@ -39,7 +44,12 @@ class EmployeeController extends Controller
      */
     public function create()
     {
-        //
+        $user = Auth::user();
+        if($user->can('create', Employee::class)){    
+            return view('employees.add-emp');
+        }else{
+            return response('Unauthorized access! FUCK OFF!');
+        }
     }
 
     /**
@@ -50,7 +60,33 @@ class EmployeeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $user = Auth::user();
+        if($user->can('create', Employee::class)){      
+            $validatedData = $request->validate([
+                'emp_id' => 'required|max:10|unique:employees,emp_id',
+                'first_name' => 'required|max:255',
+                'last_name' => 'required|max:255',
+                'dept' => 'required|max:255',
+                'email' => 'nullable|max:255|email'
+            ]);
+
+            $emp = new Employee();
+            $emp->emp_id = $request->emp_id;
+            $emp->first_name = $request->first_name;
+            $emp->last_name = $request->last_name;
+            $emp->dept = $request->last_name;
+            $emp->email = $request->last_name;
+
+            $emp->save();
+
+            $message = 'User ['.$request->emp_id.'] created successfully.';
+            
+            return redirect('/employees/add')->with('success', $message);
+        }else{
+            return response('Unauthorized access! FUCK OFF!');
+        }
+
+
     }
 
     /**
@@ -84,31 +120,36 @@ class EmployeeController extends Controller
      */
     public function update(Request $request)
     {
-        $emp = Employee::where('emp_id', '=', $request->emp_id)->first();
-        $apps = DB::table('apps')->pluck('name'); //get all apps (add active? if needed)
-        $appCount = $apps->count(); //count # of apps
+        $user = Auth::user();
+        if($user->can('create', Employee::class)){    
+            $emp = Employee::where('emp_id', '=', $request->emp_id)->first();
+            $apps = DB::table('apps')->pluck('name'); //get all apps (add active? if needed)
+            $appCount = $apps->count(); //count # of apps
 
-        for($i=0;$i<$appCount;$i++){ //loop through all apps
-            $app = strtolower($apps[$i]); //lowercase the appname
-            
-            if(isset($request->app[$i])){ //if checkbox is on
+            for($i=0;$i<$appCount;$i++){ //loop through all apps
+                $app = strtolower($apps[$i]); //lowercase the appname
+                
+                if(isset($request->app[$i])){ //if checkbox is on
 
-                $emp[$app] = 1; //basically same as $emp->appName = 1;
+                    $emp[$app] = 1; //basically same as $emp->appName = 1;
+                }
+                else{
+                    $emp[$app] = 0;
+                }
             }
-            else{
-                $emp[$app] = 0;
-            }
+
+            $emp->emp_id = $request->emp_id; //should we allow changing of emp_id? emp_id is unique in the database
+            $emp->first_name = $request->first_name;
+            $emp->last_name = $request->last_name; //dept and other info not YET included.
+
+            $emp->save();
+
+            $message = 'User ['.$request->emp_id.'] updated successfully.';
+
+            return redirect('/employees')->with('success', $message);
+        }else{
+            return response('Unauthorized access! FUCK OFF!');
         }
-
-        $emp->emp_id = $request->emp_id; //should we allow changing of emp_id? emp_id is unique in the database
-        $emp->first_name = $request->first_name;
-        $emp->last_name = $request->last_name; //dept and other info not YET included.
-
-        $emp->save();
-
-        $message = 'User ['.$request->emp_id.'] updated successfully.';
-
-        return redirect('/employees')->with('success', $message);
     }
 
     /**
@@ -135,7 +176,9 @@ class EmployeeController extends Controller
     }
 
     public function changePassword(){
-        return view('employees.change-password');
+        $emp = Auth::user();
+
+        return view('employees.change-password')->with('emp',$emp);
     }
 
     public function changePass(Request $request){ // add limit on change pass? ex. once a month????????

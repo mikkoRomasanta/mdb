@@ -22,9 +22,12 @@ Auth::routes();
 Route::get('empDataTable', 'EmployeeController@getEmployees')->name('dt.emp');
 
 Route::get('employees', 'EmployeeController@index');
+Route::post('employees/add', 'EmployeeController@store')->name('add.user');
+Route::get('employees/add','EmployeeController@create');
 Route::post('employees', 'EmployeeController@update');
 Route::get('appDataTable', 'EmployeeController@pluckApps')->name('pluck.app');
 Route::get('change-password', 'EmployeeController@changePassword');
 Route::post('change-password', 'EmployeeController@changePass');
 
+// Route::resource('employee', 'EmployeeController');
 Route::resource('apps', 'AppController');

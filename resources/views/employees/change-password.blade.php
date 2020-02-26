@@ -5,11 +5,11 @@
 <div class="container">
     <div class="row">
         <div class="col-md-3">
-            Display user info here
+            <strong>User : </strong>{{$emp->emp_id}}
             <hr>
-            <p><small>Name / ID</small></p>
-            <p><small>DEPT etc...</small></p>
-            <p><small>Contact Us / link to ticketing (if need to update info)</small></p>
+            <p><small><strong>Name:</strong> {{$emp->first_name.' '.$emp->last_name}}</small></p>
+            <p><small><strong>Dept:</strong> {{$emp->dept}}</small></p>
+            <p><small><strong>Email:</strong> {{$emp->email}}</small></p>
         </div>
         <div class="col-md-6">
             <div class="card shadow">
@@ -29,7 +29,7 @@
                             <div class="col-2"></div>
                             <div class="col-8">
                                 {{Form::label('new_password', 'New Password')}}
-                                {{Form::password('new_password',['class' => 'form-control text-center', 'placeholder' => 'enter your new password'])}}
+                                {{Form::password('new_password',['class' => 'form-control text-center', 'placeholder' => 'Minimum of 6 characters'])}}
                             </div>
                         </div>
                         <div class="form-group form-row">
@@ -43,9 +43,10 @@
                     {{Form::close()}}
                 </div>
             </div>
+            <div class="text-center"><small>Need assistance? Have a concern or suggestion? Contact us @ loc. 1013 </small></div>
         </div>
         <div class="col-md-3">
-            Display addtl. Info here
+            Additonal Info
             <hr>
             <p><small>Activated accounts.</small></p>
             <p><small>Date of last password reset</small></p>
