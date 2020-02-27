@@ -31,7 +31,7 @@ class EmployeeController extends Controller
 
             return view('employees.index')->with($data);
         }else{
-            return response('Unauthorized access! FUCK OFF!');
+            return response('GTFOH!');
         }
 
         
@@ -48,7 +48,7 @@ class EmployeeController extends Controller
         if($user->can('create', Employee::class)){    
             return view('employees.add-emp');
         }else{
-            return response('Unauthorized access! FUCK OFF!');
+            return response('GTFOH!');
         }
     }
 
@@ -83,7 +83,7 @@ class EmployeeController extends Controller
             
             return redirect('/employees/add')->with('success', $message);
         }else{
-            return response('Unauthorized access! FUCK OFF!');
+            return response('GTFOH!');
         }
 
 
@@ -148,7 +148,7 @@ class EmployeeController extends Controller
 
             return redirect('/employees')->with('success', $message);
         }else{
-            return response('Unauthorized access! FUCK OFF!');
+            return response('GTFOH!');
         }
     }
 
@@ -176,9 +176,23 @@ class EmployeeController extends Controller
     }
 
     public function changePassword(){
-        $emp = Auth::user();
+        $emp = Auth::user(); //get current logged-in user data
+        $plucked = App::pluckApps(); //get all available apps
+        $apps = []; //array to display user's active apps
+        foreach($plucked as $app){
+            $app = strtolower($app); //lowercase each appName
+            if($emp[$app] == 1){ //check if app is active
+                array_push($apps, $app); //add to $apps
+            }
+        }
 
-        return view('employees.change-password')->with('emp',$emp);
+        $data = [
+            'emp' => $emp,
+            'apps' => $apps
+        ];
+
+
+        return view('employees.change-password')->with($data);
     }
 
     public function changePass(Request $request){ // add limit on change pass? ex. once a month????????

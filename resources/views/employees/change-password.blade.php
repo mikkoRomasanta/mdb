@@ -10,6 +10,11 @@
             <p><small><strong>Name:</strong> {{$emp->first_name.' '.$emp->last_name}}</small></p>
             <p><small><strong>Dept:</strong> {{$emp->dept}}</small></p>
             <p><small><strong>Email:</strong> {{$emp->email}}</small></p>
+            <hr>
+            <strong>Accounts:</strong>
+            @foreach($apps as $app)
+                {{ strToUpper($app).' | '}}
+            @endforeach
         </div>
         <div class="col-md-6">
             <div class="card shadow">
@@ -48,7 +53,6 @@
         <div class="col-md-3">
             Additonal Info
             <hr>
-            <p><small>Activated accounts.</small></p>
             <p><small>Date of last password reset</small></p>
             <p><small># of password reset?</small></p>
         </div>

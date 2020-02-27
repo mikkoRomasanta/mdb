@@ -6,6 +6,8 @@ use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvid
 use Illuminate\Support\Facades\Gate;
 use App\Models\Employee;
 use App\Policies\EmployeePolicy;
+use App\Models\App;
+use App\Policies\AppPolicy;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -15,7 +17,8 @@ class AuthServiceProvider extends ServiceProvider
      * @var array
      */
     protected $policies = [
-        Employee::class => EmployeePolicy::class
+        Employee::class => EmployeePolicy::class,
+        App::class => AppPolicy::class
     ];
 
     /**

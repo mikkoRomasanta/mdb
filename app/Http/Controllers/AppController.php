@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\App;
+use App\Models\Employee;
 use Illuminate\Http\Request;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Auth;
 
 class AppController extends Controller
 {
@@ -16,9 +18,15 @@ class AppController extends Controller
      */
     public function index()
     {
-        $apps = App::pluckApps();
+        $user = Auth::user();
+        //using policy set at app>policies>EmployeePolicy
+        if($user->can('view', Employee::class)){ //if user is allowed to view then applist.index
+            $apps = App::pluckApps();
 
-        return view('applist.index')->with('apps', $apps);
+            return view('applist.index')->with('apps', $apps);
+        }else{
+            return response('GTFOH!');
+        }
     }
 
     /**
@@ -39,23 +47,29 @@ class AppController extends Controller
      */
     public function store(Request $request)
     {
-        $appName = strToUpper($request->app_name); //#ALLCAPS
 
-        //save new app to app table
-        $app = new App;
-        $app->name = $appName;
-        $app->save();
+        $user = Auth::user();
+        if($user->can('create', Employee::class)){      
+            $appName = strToUpper($request->app_name); //#ALLCAPS
 
-        //create new column for new app in employee table
-        $newColumnName = strToLower($appName);
+            //save new app to app table
+            $app = new App;
+            $app->name = $appName;
+            $app->save();
 
-        Schema::table('employees', function (Blueprint $table) use ($newColumnName) {
-            $table->boolean($newColumnName)->default(0);
-        });
+            //create new column for new app in employee table
+            $newColumnName = strToLower($appName);
 
-        $message = 'Wow! you made a new app. congrats I guess...';
+            Schema::table('employees', function (Blueprint $table) use ($newColumnName) {
+                $table->boolean($newColumnName)->default(0);
+            });
 
-        return redirect('/apps')->with('success', $message);
+            $message = 'Wow! you made a new app. congrats I guess...';
+
+            return redirect('/apps')->with('success', $message);
+        }else{
+            return response('GTFOH!');
+        }
     }
 
     /**
