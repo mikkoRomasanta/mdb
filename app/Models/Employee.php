@@ -8,8 +8,6 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 class Employee extends Authenticatable
 {
 
-    public $timestamps = false;
-
     public $casts = [
         'app_acc' => 'array'
     ];
