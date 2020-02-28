@@ -38,10 +38,10 @@
                     @elseif(Auth::user()->role == 'ADMIN')
                             <ul class="navbar-nav mr-auto">
                                 <li class="nav-link">
-                                    <a class="nav-link" href="/employees">Employees</a>
+                                    <a class="nav-link" href="employees">Employees</a>
                                 </li>
                                 <li class="nav-link">
-                                    <a class="nav-link" href="/apps">App List</a>
+                                    <a class="nav-link" href="apps">App List</a>
                                 </li>
                             </ul>
                     @endif
@@ -65,7 +65,7 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="/change-password">Change Password</a>
+                                    <a class="dropdown-item" href="change-password">Change Password</a>
                                     <hr>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
