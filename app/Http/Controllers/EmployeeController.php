@@ -66,7 +66,6 @@ class EmployeeController extends Controller
                 'emp_id' => 'required|max:10|unique:employees,emp_id',
                 'first_name' => 'required|max:255',
                 'last_name' => 'required|max:255',
-                'dept' => 'required|max:255',
                 'email' => 'nullable|max:255|email'
             ]);
 
@@ -74,7 +73,6 @@ class EmployeeController extends Controller
             $emp->emp_id = $request->emp_id;
             $emp->first_name = $request->first_name;
             $emp->last_name = $request->last_name;
-            $emp->dept = $request->last_name;
             $emp->email = $request->last_name;
 
             $emp->save();

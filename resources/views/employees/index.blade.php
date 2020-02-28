@@ -9,7 +9,7 @@
                     <th>Emp ID</th>
                     <th>Name</th>
                     <th>Last Name</th>
-                    <th>Dept</th>
+                    {{-- <th>Dept</th> --}}
                     <th>Email</th>
                     @foreach($apps as $app)
                         <th>{{$app}}</th>
@@ -54,7 +54,6 @@
                     {'data' : 'emp_id'},
                     {'data' : 'first_name'},
                     {'data' : 'last_name'},
-                    {'data' : 'dept'},
                     {'data' : 'email'},
                 ]; //basically madagdag la after ning {data : email} rening atyu keng addAppColumns
 

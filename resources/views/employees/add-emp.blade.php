@@ -16,10 +16,6 @@
                 {{Form::text('last_name','',['id' => 'lnameBox', 'class' => 'col-md-8 form-control'])}}
             </div>
             <div class="form-group row">
-                {{Form::label('dept', 'Department',['class' => 'col-md-3 col-form-label', 'style' => 'font-weight: bold'])}}
-                {{Form::text('dept','',['id' => 'deptBox', 'class' => 'col-md-8 form-control'])}}
-            </div>
-            <div class="form-group row">
                 {{Form::label('email', 'Email',['class' => 'col-md-3 col-form-label', 'style' => 'font-weight: bold'])}}
                 {{Form::text('email','',['id' => 'lnameBox', 'class' => 'col-md-8 form-control', 'placeholder' => 'example@nanox.com'])}}
             </div>
