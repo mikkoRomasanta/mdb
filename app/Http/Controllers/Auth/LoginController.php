@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Auth;
 
 class LoginController extends Controller
 {
@@ -21,7 +22,7 @@ class LoginController extends Controller
 
     use AuthenticatesUsers;
 
-    protected $redirectTo = '/';
+    // protected $redirectTo = '/';
 
     public function __construct()
     {
@@ -31,5 +32,22 @@ class LoginController extends Controller
     public function username()
     {
         return 'emp_id';
+    }
+
+    public function redirectTo(){
+         // User role
+        $role = Auth::user()->role; 
+        
+        switch ($role) {
+            case 'USER':
+                    return 'change-password';
+                break;
+            case 'ADMIN':
+                    return '/';
+                break; 
+            default:
+                    return '/'; 
+                break;
+        }
     }
 }

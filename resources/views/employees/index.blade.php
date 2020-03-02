@@ -9,8 +9,8 @@
                     <th>Emp ID</th>
                     <th>Name</th>
                     <th>Last Name</th>
-                    {{-- <th>Dept</th> --}}
                     <th>Email</th>
+                    <th>Status</th>
                     @foreach($apps as $app)
                         <th>{{$app}}</th>
                     @endforeach
@@ -55,6 +55,7 @@
                     {'data' : 'first_name'},
                     {'data' : 'last_name'},
                     {'data' : 'email'},
+                    {'data' : 'status'},
                 ]; //basically madagdag la after ning {data : email} rening atyu keng addAppColumns
 
                 function addAppColumns(item,index){ //function to add app(item) to builtColumns
@@ -87,7 +88,7 @@
                             text: 'Add Users',
                             className: 'dt-middle-button',
                             action: function ( e, dt, node, config ) {
-                                window.location = 'employees/add'
+                                window.location = '{{ route("create.user") }}'
                             }
                         },
                     ],
