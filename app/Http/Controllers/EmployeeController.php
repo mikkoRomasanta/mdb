@@ -121,7 +121,7 @@ class EmployeeController extends Controller
         $user = Auth::user();
         if($user->can('create', Employee::class)){    
             $emp = Employee::where('emp_id', '=', $request->emp_id)->first();
-            $apps = DB::table('apps')->pluck('name'); //get all apps (add active? if needed)
+            $apps = App::pluckApps(); //get all apps (add active? if needed)
             $appCount = $apps->count(); //count # of apps
 
             for($i=0;$i<$appCount;$i++){ //loop through all apps

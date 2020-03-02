@@ -12,7 +12,17 @@
             <div class="row">
                 @foreach($chunk as $app)
                     <div class="col-md-3">
-                        <div class="card text-center">{{$app}}</div>
+                        <div class="card text-center">
+                            <div class="card-header">{{$app}}</div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-6">Users: {{$count[strToLower($app)]}}</div>
+                                    <div class="col-md-1"> | </div>
+                                    <div class="col-md-4"><small>enabled</small></div>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
                     </div>
                 @endforeach
             </div>

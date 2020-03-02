@@ -23,7 +23,17 @@ class AppController extends Controller
         if($user->can('view', Employee::class)){ //if user is allowed to view then applist.index
             $apps = App::pluckApps();
 
-            return view('applist.index')->with('apps', $apps);
+            for($i=0;$i<$apps->count();$i++){
+                $app = strtolower($apps[$i]);
+                $count[$app] = Employee::where($app,'=', 1)->count();
+            }
+            // return dd($count);
+            $data = [
+                'apps' => $apps,
+                'count' => $count,
+            ];
+
+            return view('applist.index')->with($data);
         }else{
             return response('GTFOH!');
         }
@@ -61,7 +71,7 @@ class AppController extends Controller
             $newColumnName = strToLower($appName);
 
             Schema::table('employees', function (Blueprint $table) use ($newColumnName) {
-                $table->boolean($newColumnName)->default(0);
+                $table->boolean($newColumnName)->default(0)->after('status');
             });
 
             $message = 'Wow! you made a new app. congrats I guess...';
