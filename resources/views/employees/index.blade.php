@@ -118,6 +118,28 @@
 
                     });
 
+                    $('#empTable tbody') //for edit button + modal
+                    .on( 'click', '#resetBtn', function () {
+                        var data = DataTable.row( $(this).parents('tr') ).data(); //get row values
+                        $("#mdlResetWith").modal(); 
+                        if(data.email === null){ //if user has no email
+                            $('#idBox').val(data.id);
+                            $('#empIdBox').val(data.emp_id);
+                            $('#emailBox').val(data.email); //reset box
+                            $('#emailDiv').prop('hidden',true); //hide email input box
+                            $('#passDiv').prop('hidden',false);
+                        }else{
+                            $('#idBox').val(data.id);
+                            $('#empIdBox').val(data.emp_id);
+                            $('#emailBox').val(data.email);
+                            $('#emailDiv').prop('hidden',false);
+                            $('#passDiv').prop('hidden',true);
+                        }
+                        var num = Math.floor(100 + Math.random() * 900)
+                        $('#passSuffixBox').val(num);
+                        $('#mdlTitleReset').html('Reset Password: '+data.emp_id);
+                    });
+
             } //success function end 
         }); //ajax end
 
@@ -134,5 +156,5 @@
 
 @section('modal')
     @include('employees.edit-emp-modal')
-    {{-- @include('employees.add-emp-modal') --}}
+    @include('employees.reset-emp-modal')
 @endsection

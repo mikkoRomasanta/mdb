@@ -47,4 +47,9 @@ class EmployeePolicy
     {
         //
     }
+
+    public function resetPass(Employee $user)
+    {
+        return $user->role === 'ADMIN';
+    }
 }

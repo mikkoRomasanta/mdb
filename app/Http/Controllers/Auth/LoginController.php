@@ -37,6 +37,11 @@ class LoginController extends Controller
     public function redirectTo(){
          // User role
         $role = Auth::user()->role; 
+        $status = Auth::user()->status;
+
+        if($status === 'TEMP'){
+            return 'change-password';
+        }
         
         switch ($role) {
             case 'USER':

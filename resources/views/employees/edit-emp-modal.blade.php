@@ -8,10 +8,7 @@
             </div>
             <div class="modal-body">
                 {{Form::open(['action' => 'EmployeeController@update', 'method' => 'POST'])}}
-                    <div class="form-group row">
-                        {{Form::label('emp_id', 'Emp ID',['class' => 'col-md-3 col-form-label', 'style' => 'font-weight: bold'])}}
-                        {{Form::text('emp_id','',['id' => 'empBox', 'class' => 'col-md-8 form-control'])}}
-                    </div>
+                        {{Form::hidden('emp_id','',['id' => 'empBox', 'class' => 'col-md-8 form-control'])}}
                     <div class="form-group row">
                         {{Form::label('first_name', 'First Name',['class' => 'col-md-3 col-form-label', 'style' => 'font-weight: bold'])}}
                         {{Form::text('first_name','',['id' => 'fnameBox', 'class' => 'col-md-8 form-control'])}}

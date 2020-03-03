@@ -21,11 +21,10 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
 </head>
-
-@if(Auth::guest())
-@include('auth.login')
-@else
-    <body>
+<body>
+    @if(Auth::guest())
+        @include('auth.login')
+    @else
         <div id="app">
             <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
                 <div class="container">
@@ -96,6 +95,6 @@
         </div>
 
         @stack('scripts')
+    @endif
     </body>
-@endif
 </html>

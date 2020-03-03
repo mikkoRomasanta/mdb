@@ -7,6 +7,7 @@ use App\Models\App;
 use App\Rules\ConfirmOldPassword;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use App\Notifications\ResetPassword;
 use Auth;
 use DB;
 
@@ -119,7 +120,13 @@ class EmployeeController extends Controller
     public function update(Request $request)
     {
         $user = Auth::user();
-        if($user->can('create', Employee::class)){    
+        if($user->can('create', Employee::class)){
+            $validatedData = $request->validate([
+                'first_name' => 'required|max:255',
+                'last_name' => 'required|max:255',
+                'email' => 'nullable|max:255|email'
+            ]);
+            
             $emp = Employee::where('emp_id', '=', $request->emp_id)->first();
             $apps = App::pluckApps(); //get all apps (add active? if needed)
             $appCount = $apps->count(); //count # of apps
@@ -173,7 +180,7 @@ class EmployeeController extends Controller
         return $apps->toJson();
     }
 
-    public function changePassword(){
+    public function changePasswordIndex(){
         $emp = Auth::user(); //get current logged-in user data
         $plucked = App::pluckApps(); //get all available apps
         $apps = []; //array to display user's active apps
@@ -193,7 +200,7 @@ class EmployeeController extends Controller
         return view('employees.change-password')->with($data);
     }
 
-    public function changePass(Request $request){ // add limit on change pass? ex. once a month????????
+    public function changePass(Request $request){ // FOR normal change pass
         $userAuth = Auth::user(); //get current logged-in user's info
         $oldPassword = $userAuth->password; //get current logged-in user's password
         $this->validate($request, [
@@ -207,6 +214,7 @@ class EmployeeController extends Controller
 
         $emp = Employee::where('emp_id', '=', $userAuth->emp_id)->first();
         $emp->password = Hash::make($newPassword);
+        $emp->status = 'ACTIVE'; // will activate INACTIVE / TEMP users
         $emp->save();
 
         // return response()->json(['result' => $newPassword.' '.$userId]);
@@ -216,5 +224,33 @@ class EmployeeController extends Controller
         $message = 'User ['.$userAuth->emp_id.'] updated successfully.';
         return redirect('/login')->with('success', $message);
     }
+
+    public function resetPass(Request $request){
+        $user = Auth::user();
+        if($user->can('resetPass', Employee::class)){    
+            $emp = Employee::findOrFail($request->id); //get selected user info
+            $pass = $request->reset_pass_base.$request->reset_pass_suffix; //combine pass + random 3 digit number
+            $emp->password  = Hash::make($pass);
+            $emp->status = 'TEMP'; //TEMP = indicator that user has a temporary password.
+            $emp->save();
+
+            if(is_null($request->email)){ //if user has no email
+
+                $message = 'User ['.$request->emp_id.'] updated successfully. New password is: '.$pass;
+                return redirect('/employees')->with('success', $message);
+            }
+            else{
+                    $emp->tempPass = $pass;
+                // $emp->notify(new ResetPassword($emp)); //send email notif. follow App\Notifications\ResetPassword;
+
+               $message = 'Email sent to User ['.$request->emp_id.']';
+               return redirect('/employees')->with('success', $message);
+            }        
+        }else{
+            return response('GTFOH!');
+        }
+        
+    }
+    
 
 }
