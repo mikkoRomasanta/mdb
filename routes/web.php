@@ -29,6 +29,7 @@ Route::get('appDataTable', 'EmployeeController@pluckApps')->name('pluck.app');
 Route::get('change-password', 'EmployeeController@changePasswordIndex');
 Route::post('change-password', 'EmployeeController@changePass');
 Route::post('reset-password', 'EmployeeController@resetPass');
+Route::post('applist/delete','AppController@delete')->name('delete.app');
 
 // Route::resource('employee', 'EmployeeController');
 Route::resource('apps', 'AppController');
