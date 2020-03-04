@@ -155,6 +155,6 @@
 @endpush
 
 @section('modal')
-    @include('employees.edit-emp-modal')
-    @include('employees.reset-emp-modal')
+    @include('employees.modal-edit-emp')
+    @include('employees.modal-reset-emp')
 @endsection

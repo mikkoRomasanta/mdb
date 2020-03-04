@@ -31,7 +31,8 @@ class ResetPassword extends Notification
     {
         return (new MailMessage)
                     ->line('Your password has been reset! Your temporary password is:')
-                    ->line('<h4>'.$emp->tempPass.'</h4>')
+                    // ->line('<h4>'.$emp->tempPass.'</h4>')
+                    ->line('pass123')
                     ->action('Change Password', url('/change-password'))
                     ->line('Please change your password using the link above.');
     }

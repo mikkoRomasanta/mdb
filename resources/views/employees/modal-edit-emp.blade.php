@@ -1,5 +1,5 @@
 <div class="modal fade" id="mdlEdit" role="dialog">
-    <div class="modal-dialog modal-lg">
+    <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header color-bg-main color-font-dark">
                 <h4 class="modal-title" id="mdlTitle"></h4>
@@ -17,11 +17,17 @@
                         {{Form::label('last_name', 'Last Name',['class' => 'col-md-3 col-form-label', 'style' => 'font-weight: bold'])}}
                         {{Form::text('last_name','',['id' => 'lnameBox', 'class' => 'col-md-8 form-control'])}}
                     </div>
-                    <div class="form-group row">
+                    <div class="form-check form-check-inline">
                         <!-- App checkboxes Start-->
                         @for($i=0;$i<count($apps);$i++) <!-- count $apps from index.blade.php-->
-                            {{Form::label($apps[$i],'',['class' => 'col-md-1 col-form-label', 'style' => 'font-weight: bold'])}}
-                            {{Form::checkbox('app['.$i.']',null,false,['id' => 'appBox'.$i, 'class' => 'col-md-1 form-control'])}}
+                            <div class="card">
+                                <div class="card-header p-2">
+                                    {{Form::label($apps[$i],'',['class' => 'form-check-label', 'style' => 'font-weight: bold'])}}
+                                </div>
+                                <div class="card-body p-2" align="center">
+                                    {{Form::checkbox('app['.$i.']',null,false,['id' => 'appBox'.$i, 'class' => 'form-check-input'])}}
+                                </div>
+                            </div>
                         @endfor
                         <!-- App checkboxes End-->
 

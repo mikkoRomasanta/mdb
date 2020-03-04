@@ -32,3 +32,8 @@ Route::post('reset-password', 'EmployeeController@resetPass');
 
 // Route::resource('employee', 'EmployeeController');
 Route::resource('apps', 'AppController');
+
+Route::get('preview-emails', function () {
+    $message = (new \App\Notifications\ResetPassword(\App\Models\Employee::find(1)))->toMail('test@test.com');
+    return $message->render();
+}); //to preview Reset Password email. change $emp->tempPass @ App\Notifications\ResetPassword
