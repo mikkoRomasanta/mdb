@@ -10,8 +10,12 @@ class Employee extends Authenticatable
 {
     use Notifiable;
 
-    public function accounts(){
-        return $this->hasOne('App\Models\Account','emp_id','emp_id');
+    public function dept(){
+        return $this->belongsTo('App\Models\Dept');
+    }
+
+    public function employeeProcess(){
+        return $this->hasMany('App\Models\EmployeeProcess','user_id','id');
     }
 
 }

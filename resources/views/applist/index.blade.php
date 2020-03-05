@@ -14,13 +14,13 @@
                     <div class="col-md-3">
                         <div class="card text-center">
                             <div class="card-header">                                
-                                {{Form::open(['action' => 'AppController@delete', 'method' => 'POST'])}}
+                                {{-- {{Form::open(['action' => 'AppController@delete', 'method' => 'POST'])}} --}}
                                     {{Form::hidden('appName',$app,['readonly'])}}
                                 
                                 {{$app}}
                                     {{-- <a class="float-right btn-danger small-icon" title="delete" onclick="return confirm('Are you sure?')" type="submit" value="submit"><i class='fas fa-trash fa-fw'></i></a> --}}
-                                    {{Form::button('<i class="fa fa-trash"></i>',['type' => 'submit','class' => 'float-right text-danger', 'title' => 'Delete'])}}
-                                {{Form::close()}}
+                                    {{-- {{Form::button('<i class="fa fa-trash"></i>',['type' => 'submit','class' => 'float-right text-danger', 'title' => 'Delete'])}} --}}
+                                {{-- {{Form::close()}} --}}
                             </div>
                             <div class="card-body">
                                 <div class="row">

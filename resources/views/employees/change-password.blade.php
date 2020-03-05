@@ -10,6 +10,8 @@
             <p><small><strong>Name:</strong> {{$emp->first_name.' '.$emp->last_name}}</small></p>
             {{-- <p><small><strong>Dept:</strong> {{$emp->dept}}</small></p> --}}
             <p><small><strong>Email:</strong> {{$emp->email}}</small></p>
+            <p><small><strong>Dept:</strong> {{$emp->dept->dept_name}}</small></p>
+            {{-- <p><small><strong>Process</strong> {{$test[0]['employee_process']['process_id']}}</small></p> --}}
             <hr>
             <strong>Accounts:</strong>
             @foreach($apps as $app)

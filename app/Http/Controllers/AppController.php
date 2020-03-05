@@ -127,15 +127,15 @@ class AppController extends Controller
         //
     }
 
-    public function delete(Request $request){
-        $user = Auth::user();
-        if($user->can('create', Employee::class)){
+    // public function delete(Request $request){
+    //     $user = Auth::user();
+    //     if($user->can('create', Employee::class)){
             
-            $message = 'Wow! you made a new app. congrats I guess...'.$request->appName;
+    //         $message = 'Wow! you made a new app. congrats I guess...'.$request->appName;
 
-            return redirect('/apps')->with('success', $message);
-        }else{
-            return response('GTFOH!');
-        }
-    }
+    //         return redirect('/apps')->with('success', $message);
+    //     }else{
+    //         return response('GTFOH!');
+    //     }
+    // }
 }

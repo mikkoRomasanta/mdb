@@ -21,6 +21,7 @@ class CreateEmployeesTable extends Migration
             $table->string('last_name');
             $table->string('password',255)->default(Hash::make('pass1234'));
             $table->string('email')->nullable();
+            $table->integer('dept_id');
             $table->string('role')->default('USER');
             $table->string('status')->default('ACTIVE');
             $table->timestamps();

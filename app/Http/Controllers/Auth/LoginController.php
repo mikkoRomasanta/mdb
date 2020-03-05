@@ -38,7 +38,7 @@ class LoginController extends Controller
          // User role
         $role = Auth::user()->role; 
         $status = Auth::user()->status;
-
+        
         if($status === 'TEMP'){
             return 'change-password';
         }

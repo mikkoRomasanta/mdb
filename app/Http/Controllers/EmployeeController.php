@@ -169,8 +169,9 @@ class EmployeeController extends Controller
     }
 
     public function getEmployees(){
-        $emp = Employee::get();
-
+        $emp = Employee::with('dept')->get();
+        // $emp = Employee::get();
+        // return dd($emp);
         return $emp->toJson();
     }
 
@@ -181,7 +182,12 @@ class EmployeeController extends Controller
     }
 
     public function changePasswordIndex(){
-        $emp = Auth::user(); //get current logged-in user data
+        $user = Auth::user(); //get current logged-in user data
+        $user_id = $user->id;
+        $emp = Employee::with('dept')->where('emp_id','=',$user->emp_id)->first(); //use this for div and process
+        $test = Employee::with(['employeeProcess' => function ($q) use($user_id) {$q->where('user_id', '=', $user_id);}])->get();
+        // with(['itemStats' => function ($q) {$q->orderBy('id', 'desc');}])
+        // return dd($test);
         $plucked = App::pluckApps(); //get all available apps
         $apps = []; //array to display user's active apps
         foreach($plucked as $app){
@@ -193,7 +199,8 @@ class EmployeeController extends Controller
 
         $data = [
             'emp' => $emp,
-            'apps' => $apps
+            'apps' => $apps,
+            'test' => $test
         ];
 
 

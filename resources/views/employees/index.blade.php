@@ -10,6 +10,8 @@
                     <th>Name</th>
                     <th>Last Name</th>
                     <th>Email</th>
+                    <th>Dept</th>
+                    <th>Role</th>
                     <th>Status</th>
                     @foreach($apps as $app)
                         <th>{{$app}}</th>
@@ -55,6 +57,8 @@
                     {'data' : 'first_name'},
                     {'data' : 'last_name'},
                     {'data' : 'email'},
+                    {'data' : 'dept.dept_name'},
+                    {'data' : 'role'},
                     {'data' : 'status'},
                 ]; //basically madagdag la after ning {data : email} rening atyu keng addAppColumns
 
@@ -92,6 +96,13 @@
                             }
                         },
                     ],
+                    scrollY:        "300px",
+                    scrollX:        true,
+                    paging:         false,
+                    fixedColumns:   {
+                        leftColumns: 1,
+                        rightColumns: 1
+                    },
                     orderBy: 1
                         
                 }); // end of DT
