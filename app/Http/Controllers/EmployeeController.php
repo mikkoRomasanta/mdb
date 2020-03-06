@@ -184,7 +184,7 @@ class EmployeeController extends Controller
     public function changePasswordIndex(){
         $user = Auth::user(); //get current logged-in user data
         $user_id = $user->id;
-        $emp = Employee::with('dept')->where('emp_id','=',$user->emp_id)->first(); //use this for div and process
+        $emp = Employee::where('emp_id','=',$user->emp_id)->first(); //use this for div and process
         $test = Employee::with(['employeeProcess' => function ($q) use($user_id) {$q->where('user_id', '=', $user_id);}])->get();
         // with(['itemStats' => function ($q) {$q->orderBy('id', 'desc');}])
         // return dd($test);
