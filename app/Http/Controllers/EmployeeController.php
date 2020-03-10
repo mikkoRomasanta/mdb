@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Employee;
 use App\Models\App;
+use App\Models\EmployeeProcess;
+use App\Models\Process;
 use App\Rules\ConfirmOldPassword;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -169,8 +171,7 @@ class EmployeeController extends Controller
     }
 
     public function getEmployees(){
-        $emp = Employee::with('dept')->get();
-        // $emp = Employee::get();
+        $emp = Employee::get();
         // return dd($emp);
         return $emp->toJson();
     }
@@ -183,11 +184,14 @@ class EmployeeController extends Controller
 
     public function changePasswordIndex(){
         $user = Auth::user(); //get current logged-in user data
-        $user_id = $user->id;
         $emp = Employee::where('emp_id','=',$user->emp_id)->first(); //use this for div and process
-        $test = Employee::with(['employeeProcess' => function ($q) use($user_id) {$q->where('user_id', '=', $user_id);}])->get();
+        $proc = EmployeeProcess::where('user_id',$user->id)->get();
+        $proc_id = $proc[0]['process_id'];
+        // $org = Process::with(['dept' => function ($q){$q->where('id','=',8);}])->where('id','=',$proc_id)->get();
+        $org = Process::with('department','division')->where('id','=',$proc_id)->first();
+        // return dd($org);
         // with(['itemStats' => function ($q) {$q->orderBy('id', 'desc');}])
-        // return dd($test);
+        // return dd($test2);
         $plucked = App::pluckApps(); //get all available apps
         $apps = []; //array to display user's active apps
         foreach($plucked as $app){
@@ -200,7 +204,8 @@ class EmployeeController extends Controller
         $data = [
             'emp' => $emp,
             'apps' => $apps,
-            'test' => $test
+            'proc' => $proc,
+            'org' => $org
         ];
 
 

@@ -2,22 +2,24 @@
 
 @section('content')
     <div class="container">
-        <table class="table table-striped display nowarp" id="empTable"  style="width:100%">
-            <thead>
-                <tr>
-                    <th></th>
-                    <th>Emp ID</th>
-                    <th>Name</th>
-                    <th>Last Name</th>
-                    <th>Email</th>
-                    <th>Role</th>
-                    <th>Status</th>
-                    @foreach($apps as $app)
-                        <th>{{$app}}</th>
-                    @endforeach
-                </tr>
-            </thead>
-        </table>
+        <div class="empDataTable">
+            <table class="table table-striped display nowarp" id="empTable"  style="width:100%">
+                <thead>
+                    <tr>
+                        <th style="color: white; background-color:gray">Actions</th>
+                        <th>Emp ID</th>
+                        <th>Name</th>
+                        <th>Last Name</th>
+                        <th>Email</th>
+                        <th>Role</th>
+                        <th>Status</th>
+                        @foreach($apps as $app)
+                            <th>{{$app}}</th>
+                        @endforeach
+                    </tr>
+                </thead>
+            </table>
+        </div>
     </div>
 
 @endsection
@@ -70,9 +72,7 @@
                 
                 apps.forEach(addAppColumns); //for each app call addAppColumns function ^
 
-                var DataTable =   $('#empTable').DataTable({ //start of DT
-                    "scrollY": 400,
-                    "scrollX": true,
+                var DataTable =   $('#empTable').DataTable({ //start of DT  
                     stateSave: true,
                     ajax: {
                             url: "{{route('dt.emp')}}",
@@ -94,12 +94,15 @@
                             }
                         },
                     ],
-                    scrollY:        "300px",
-                    scrollX:        true,
-                    paging:         false,
-                    fixedColumns:   {
+                    scrollY: "450px",
+                    scrollX: true,
+                    scrollCollapse: true,
+                    columnDefs: [
+                        { width: 35, targets: 0 },
+                        { width: 80, targets: 1 },
+                    ],
+                    fixedColumns: {
                         leftColumns: 1,
-                        rightColumns: 1
                     },
                     orderBy: 1
                         

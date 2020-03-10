@@ -1,7 +1,7 @@
 
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
+{{-- <div class="container" style="background-color:red"> --}}
+    <div class="row h-100 align-items-center justify-content-center">
+        <div class="col-4">
             <div class="card">
                 <div class="card-header">{{ __('Login') }}</div>
 
@@ -10,9 +10,9 @@
                         @csrf
 
                         <div class="form-group row">
-                            <label for="emp_id" class="col-md-4 col-form-label text-md-right">{{ __('Employee Id') }}</label>
+                            <label for="emp_id" class="col-md-4 col-form-label text-md-right">{{ __('Employee ID') }}</label>
 
-                            <div class="col-md-6">
+                            <div class="col-md-7">
                                 <input id="emp_id" type="text" class="form-control @error('emp_id') is-invalid @enderror" name="emp_id" value="{{ old('emp_id') }}" required autocomplete="emp_id" autofocus placeholder="ex. 2910101">
 
                                 @error('emp_id')
@@ -26,7 +26,7 @@
                         <div class="form-group row">
                             <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
 
-                            <div class="col-md-6">
+                            <div class="col-md-7">
                                 <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
 
                                 @error('password')
@@ -39,27 +39,27 @@
 
                         <div class="form-group row">
                             <div class="col-md-6 offset-md-4">
-                                <div class="form-check">
+                                {{-- <div class="form-check">
                                     <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
 
                                     <label class="form-check-label" for="remember">
                                         {{ __('Remember Me') }}
                                     </label>
-                                </div>
+                                </div> --}}
                             </div>
                         </div>
 
                         <div class="form-group row mb-0">
-                            <div class="col-md-8 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
+                            <div class="col-md-12">
+                                <button type="submit" class="btn btn-primary btn-block">
                                     {{ __('Login') }}
                                 </button>
 
-                                @if (Route::has('password.request'))
+                                {{-- @if (Route::has('password.request'))
                                     <a class="btn btn-link" href="{{ route('password.request') }}">
                                         {{ __('Forgot Your Password?') }}
                                     </a>
-                                @endif
+                                @endif --}}
                             </div>
                         </div>
                     </form>
@@ -67,5 +67,4 @@
             </div>
         </div>
     </div>
-</div>
-
+{{-- </div> --}}

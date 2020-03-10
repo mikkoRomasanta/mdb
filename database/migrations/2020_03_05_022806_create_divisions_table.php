@@ -15,8 +15,8 @@ class CreateDivisionsTable extends Migration
     {
         Schema::create('tbl_div', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('div_name',50);
-            $table->string('div_status',10)->default('ACTIVE');
+            $table->string('division_name',50);
+            $table->string('division_status',10)->default('ACTIVE');
         });
     }
 

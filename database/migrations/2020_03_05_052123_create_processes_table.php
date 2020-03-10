@@ -15,10 +15,10 @@ class CreateProcessesTable extends Migration
     {
         Schema::create('tbl_proc', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('proc_name',50);
-            $table->string('status',10)->default('ACTIVE');
-            $table->integer('div_id');
-            $table->integer('dept_id');
+            $table->string('process_name',50);
+            $table->string('process_status',10)->default('ACTIVE');
+            $table->integer('division_id');
+            $table->integer('department_id');
         });
     }
 

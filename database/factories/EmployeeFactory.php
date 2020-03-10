@@ -11,7 +11,6 @@ $factory->define(Employee::class, function (Faker $faker) {
         'first_name' => $faker->firstName,
         'last_name' => $faker->lastName,
         'password' => '$2y$10$CT2qYBtinZOycRSxBs83XOlwTFsKUIMiOe25256ENp.B3JjYfWcdC',
-        'dept' => $faker->departmentName,
         'email' => $fake->safeEmail
     ];
 });

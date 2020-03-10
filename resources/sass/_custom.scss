@@ -1,6 +1,7 @@
-div.dataTables_wrapper{
-    width: 1200px;
+html,body{
+    height:100%;
 }
+
 
 #empTable_length{
     padding-top: .755rem; //datatables
@@ -16,4 +17,18 @@ hr{
     font-size: 0.75rem;
     line-height: 1.5;
     border-radius: 0.2rem;
+}
+
+.empDataTable{
+    max-width: 1200px;
+    margin: 0 auto;
+    // overflow-x: auto;
+}
+
+#empTable th, td {
+    white-space: nowrap;
+}
+
+tr[role=row] {
+    background:white;
 }

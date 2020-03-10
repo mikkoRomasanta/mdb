@@ -11,14 +11,14 @@ class Process extends Model
     protected $table = 'tbl_proc';
 
     public function division(){
-        return $this->belongsTo('App\Division','id','div_id');
+        return $this->belongsTo('App\Models\Division','division_id','id');
     }
 
-    public function dept(){
-        return $this->belongsTo('App\Dept','dept_id','id');
+    public function department(){
+        return $this->belongsTo('App\Models\Dept','department_id','id');
     }
 
     public function employees(){
-        return $this->belongsToMany('App\EmployeeProcess');
+        return $this->belongsToMany('App\Models\EmployeeProcess');
     }
 }

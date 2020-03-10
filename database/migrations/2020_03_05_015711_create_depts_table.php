@@ -15,8 +15,8 @@ class CreateDeptsTable extends Migration
     {
         Schema::create('tbl_dept', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('dept_name',50);
-            $table->string('dept_status',10)->default('ACTIVE');
+            $table->string('department_name',50);
+            $table->string('department_status',10)->default('ACTIVE');
         });
     }
 
