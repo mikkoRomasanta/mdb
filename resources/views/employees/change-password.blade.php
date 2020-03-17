@@ -9,9 +9,13 @@
             <hr>
             <p><small><strong>Name:</strong> {{$emp->first_name.' '.$emp->last_name}} </small></p>
             <p><small><strong>Email:</strong> {{$emp->email}} </small></p>
-            <p><small><strong>Division:</strong> {{$org->division->division_name}} </small></p>
-            <p><small><strong>Department:</strong> {{$org->department->department_name}} </small></p>
-            <p><small><strong>Process:</strong> {{$org->process_name}} </small></p>
+                <p><small><strong>Division:</strong> {{$org[0]->division->division_name}} </small></p>
+                <p><small><strong>Department:</strong> {{$org[0]->department->department_name}} </small></p>
+                <p><small><strong>Process:</strong>
+                    @foreach($org as $proc)
+                        {{$proc->process_name}} <br>
+                    @endforeach
+                    </small></p>
             <hr>
             <strong>Accounts:</strong>
             @foreach($apps as $app)

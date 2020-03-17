@@ -31,9 +31,10 @@ Route::post('change-password', 'EmployeeController@changePass');
 Route::post('reset-password', 'EmployeeController@resetPass');
 Route::get('organization', 'ProcessController@index')->name('organization');
 Route::get('organization/{id}','ProcessController@showEmp')->name('show.users');
+// Route::post('organization/add-user','EmployeeProcess@newRecord')->name('store.empProcess');
 // Route::post('applist/delete','AppController@delete')->name('delete.app');
 
-// Route::resource('employee', 'EmployeeController');
+Route::resource('employeeProcess', 'EmployeeProcessController');
 Route::resource('apps', 'AppController');
 
 Route::get('preview-emails', function () {

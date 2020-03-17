@@ -25,7 +25,7 @@ class AppController extends Controller
 
             for($i=0;$i<$apps->count();$i++){
                 $app = strtolower($apps[$i]);
-                $count[$app] = Employee::where($app,'=', 1)->count();
+                $count[$app] = Employee::where($app,'=', 1)->count(); //count employees w/app
             }
             // return dd($count);
             $data = [

@@ -49,7 +49,9 @@ class EmployeeController extends Controller
     {
         $user = Auth::user();
         if($user->can('create', Employee::class)){    
-            return view('employees.add-emp');
+            $process = Process::orderBy('process_name','ASC')->pluck('process_name','id');
+
+            return view('employees.add-emp')->with('data',$process);
         }else{
             return response('GTFOH!');
         }
@@ -77,8 +79,16 @@ class EmployeeController extends Controller
             $emp->first_name = $request->first_name;
             $emp->last_name = $request->last_name;
             $emp->email = $request->last_name;
+            $emp->role = $request->role;
 
             $emp->save();
+
+            $user_id = Employee::where('emp_id','=',$request->emp_id)->value('id');
+
+            $proc = new EmployeeProcess();
+            $proc->user_id = $user_id;
+            $proc->process_id = $request->process;
+            $proc->save();
 
             $message = 'User ['.$request->emp_id.'] created successfully.';
             
@@ -147,7 +157,9 @@ class EmployeeController extends Controller
 
             $emp->emp_id = $request->emp_id; //should we allow changing of emp_id? emp_id is unique in the database
             $emp->first_name = $request->first_name;
-            $emp->last_name = $request->last_name; //dept and other info not YET included.
+            $emp->last_name = $request->last_name;
+            $emp->email = $request->email;
+            $emp->role = $request->role;
 
             $emp->save();
 
@@ -186,9 +198,13 @@ class EmployeeController extends Controller
         $user = Auth::user(); //get current logged-in user data
         $emp = Employee::where('emp_id','=',$user->emp_id)->first(); //use this for div and process
         $proc = EmployeeProcess::where('user_id',$user->id)->get();
-        $proc_id = $proc[0]['process_id'];
+        for($i=0;$i<$proc->count();$i++){
+            $proc_id[$i] = $proc[$i]['process_id'];
+            $org[$i] = Process::with('department','division')->where('id','=',$proc_id[$i])->first();
+        }
+        // return dd($proc_id);
         // $org = Process::with(['dept' => function ($q){$q->where('id','=',8);}])->where('id','=',$proc_id)->get();
-        $org = Process::with('department','division')->where('id','=',$proc_id)->first();
+        // $org = Process::with('department','division')->where('id','=',$proc_id)->get();
         // return dd($org);
         // with(['itemStats' => function ($q) {$q->orderBy('id', 'desc');}])
         // return dd($test2);

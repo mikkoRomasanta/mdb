@@ -14,7 +14,7 @@
                         <div class="col-md-9">
                             <div class="form-group row" id="emailDiv">
                                 {{Form::label('email', 'Email',['class' => 'col-md-2 col-form-label', 'style' => 'font-weight: bold'])}}
-                                {{Form::text('email','',['id' => 'emailBox', 'class' => 'col-md-10 form-control', 'readonly'])}}
+                                {{Form::text('email','',['id' => 'emailResetBox', 'class' => 'col-md-10 form-control', 'readonly'])}}
                             </div>
                             <div class="form-group row" id="passDiv">
                                 {{Form::label('reset_pass_base','Temp Password:',['class' => 'col-md-6 col-form-label', 'style' => 'font-weight: bold'])}}

@@ -17,6 +17,14 @@
                         {{Form::label('last_name', 'Last Name',['class' => 'col-md-3 col-form-label', 'style' => 'font-weight: bold'])}}
                         {{Form::text('last_name','',['id' => 'lnameBox', 'class' => 'col-md-8 form-control'])}}
                     </div>
+                    <div class="form-group row">
+                        {{Form::label('email', 'Email',['class' => 'col-md-3 col-form-label', 'style' => 'font-weight: bold'])}}
+                        {{Form::text('email','',['id' => 'emailBox', 'class' => 'col-md-8 form-control'])}}
+                    </div>
+                    <div class="form-group row">
+                        {{Form::label('role', 'Role',['class' => 'col-md-3 col-form-label', 'style' => 'font-weight: bold'])}}
+                        {{Form::select('role',['ADMIN'=>'ADMIN','USER' => 'USER'],'',['id' => 'roleBox', 'class' => 'col-md-8 form-control'])}}
+                    </div>
                     <div class="form-check form-check-inline">
                         <!-- App checkboxes Start-->
                         @for($i=0;$i<count($apps);$i++) <!-- count $apps from index.blade.php-->
