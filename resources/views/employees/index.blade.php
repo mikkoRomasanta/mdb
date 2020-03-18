@@ -118,37 +118,37 @@
                     },
                     orderBy: 1,
                     initComplete: function () {
-                this.api().columns([5,6]).every( function () {
-                    var column = this;
-                    var select = $('<select style="font-size: .8em;width: 100%;"><option value="">All</option></select>')
-                    .appendTo($("#filterRow").find("th").eq(column.index()))
-                    .on( 'change', function () {
-                        var val = $.fn.dataTable.util.escapeRegex(
-                        $(this).val()
-                        );
+                        this.api().columns([5,6]).every( function () {
+                            var column = this;
+                            var select = $('<select style="font-size: .8em;width: 100%;"><option value="">All</option></select>')
+                            .appendTo($("#filterRow").find("th").eq(column.index()))
+                            .on( 'change', function () {
+                                var val = $.fn.dataTable.util.escapeRegex(
+                                $(this).val()
+                                );
 
-                        column
-                        .search( val ? '^'+val+'$' : '', true, false )
-                        .draw();
-                    } );
-                    column
-                    .data()
-                    .unique()
-                    .sort()
-                    .each(function(d, j) {
-                        var val = $.fn.dataTable.util.escapeRegex(d);
-                        if (column.search() === "^" + val + "$") {
-                        select.append(
-                        '<option value="' + d + '" selected="selected">' + d + "</option>"
-                        );
-                        } else {
-                        select.append('<option value="' + d + '">' + d + "</option>");
-                        }
-                    });
-                } );
-            }
+                                column
+                                .search( val ? '^'+val+'$' : '', true, false )
+                                .draw();
+                            } );
+                            column
+                            .data()
+                            .unique()
+                            .sort()
+                            .each(function(d, j) {
+                                var val = $.fn.dataTable.util.escapeRegex(d);
+                                if (column.search() === "^" + val + "$") {
+                                select.append(
+                                '<option value="' + d + '" selected="selected">' + d + "</option>"
+                                );
+                                } else {
+                                select.append('<option value="' + d + '">' + d + "</option>");
+                                }
+                            });
+                        } );
+                    }
                         
-                }); // end of DT
+                }); // end of emp DT
 
                 $('#empTable tbody') //for edit button + modal
                     .on( 'click', '#editBtn', function () {
@@ -162,6 +162,7 @@
                         $('#emailBox').val(data.email);
                         $('#roleBox').val(data.role);
                         var id = data.id;
+                        $('#idEditBox').val(data.id);
                         
                         for(var x=0;x<apps.length;x++){//for every app; do this
                             $('#appBox'+x).prop('checked',false); //clear checkboxes 1st
@@ -173,15 +174,16 @@
                             }
                         }
 
-                        $.get('{{url('userProcess')}}/' + id,function(data,status){
+                        $.get('{{url('userProcess')}}/' + id,function(data,status){ //processes of selected user
                             var str = '';
                             // alert(id);
                             console.log(data);
-                            $.each( data, function( key, value ) {
-                                str += '<tr><td>'+value["process"]["process_name"]+'&emsp;&emsp;</td></tr>';
+                            $.each( data, function( key, value ) { //add rows for every process
+                                str += '<tr><td hidden="hidden">'+value["id"]+'</td><td>'+value["process"]["process_name"]+'&emsp;&emsp;</td><td>'+
+                                '<button class="text-danger" id="delBtn"><i class="fas fa-minus-circle fa-fw" title="delete process"></i></button></td></tr>';
                             });
 
-                            $('#userProcessTable').html(str);
+                            $('#userProcessTableBody').html(str); //insert rows into table
                             
                         });
 
@@ -209,10 +211,75 @@
                         $('#mdlTitleReset').html('Reset Password: '+data.emp_id);
                     });
 
+                    $('#flexdata').flexdatalist({ //choose process to add to user
+                        minLength: 1,
+                        data: '{{url("getAllProcess")}}',
+                        searchIn: 'process_name',
+                        valueProperty: 'id',
+                        visibleProperties: ['process_name'],
+                        selectionRequired: true,
+                        searchContain: true
+                    });
+
+                    $('#addBtn').click(function(){ //add process to current selected user
+                        $.ajaxSetup({
+                            headers: {
+                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                            }
+                        });
+                        var process_id = $('#flexdata').val();
+                        var user_id = $('#idEditBox').val();
+
+                        if(process_id == ''){
+                            alert('please select a process');
+                        }
+
+                        $.ajax({
+                            type: "POST",
+                            url: "{{route('employeeProcess.store')}}",
+                            data: {
+                                'user_id':user_id,
+                                'process_id':process_id,
+                            },
+                            success:function(data) {
+                                alert('User successfully added to process');
+                                location.reload();
+                            },
+                        });
+                    });
+
             } //success function end 
         }); //ajax end
 
-    });
+        //delete user process
+        $('#userProcessTable tbody').on( 'click', '#delBtn', function () { //remove process from user
+            var x = confirm('Are you sure you want to remove the process?');
+            if(x != true){
+                e.preventDefault();
+            }else{
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+                var empProcess_id = $(this).closest('tr').children('td:eq(0)').text();
+
+                $.ajax({
+                    type: "POST",
+                    url: "{{route('del.userProcess')}}",
+                    data: {
+                        'empProcess_id':empProcess_id,
+                    },
+                    success:function(data) {
+                        alert('Process successfully deleted');
+                        location.reload();
+                    },
+                });
+            }
+            
+        });
+
+    }); //document ready end
 </script>
 @if (count($errors) > 0)
     <script>

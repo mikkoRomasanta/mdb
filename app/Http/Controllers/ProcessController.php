@@ -91,4 +91,10 @@ class ProcessController extends Controller
         
         return $data->toArray();
     }
+
+    public function getAllProcess(){
+        $data = Process::get();
+
+        return $data;
+    }
 }

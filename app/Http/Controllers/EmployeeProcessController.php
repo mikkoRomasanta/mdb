@@ -7,32 +7,16 @@ use Illuminate\Http\Request;
 
 class EmployeeProcessController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         //
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
 
@@ -50,62 +34,31 @@ class EmployeeProcessController extends Controller
 
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\ModelsEmployeeProcess  $modelsEmployeeProcess
-     * @return \Illuminate\Http\Response
-     */
     public function show(ModelsEmployeeProcess $modelsEmployeeProcess)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\ModelsEmployeeProcess  $modelsEmployeeProcess
-     * @return \Illuminate\Http\Response
-     */
     public function edit(ModelsEmployeeProcess $modelsEmployeeProcess)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\ModelsEmployeeProcess  $modelsEmployeeProcess
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, ModelsEmployeeProcess $modelsEmployeeProcess)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\ModelsEmployeeProcess  $modelsEmployeeProcess
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(ModelsEmployeeProcess $modelsEmployeeProcess)
+    public function destroy(Request $request)
     {
-        //
+
     }
 
-<<<<<<< HEAD
-    public function getUserProcess($userId){
-        // $userProcess = EmployeeProcess::getUserProcess($userId);
+    public function deleteUserProcess(Request $request){
+        $id = $request->input('empProcess_id');
 
-        // return $userProcess;
-
-        $userProcess = EmployeeProcess::where('user_id','=',$userId)->get();
-
-        return $userProcess;
+        $emp = EmployeeProcess::find($id);
+        $emp->delete();
     }
 
-=======
->>>>>>> f767090ca48bd6fc78681d340906ccf82573925b
 }

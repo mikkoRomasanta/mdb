@@ -8,9 +8,10 @@
             </div>
             <div class="modal-body">
                 <div class="row">
-                    <div class="col-md-8">
+                    <div class="col-md-7 border-right">
                         {{Form::open(['action' => 'EmployeeController@update', 'method' => 'POST'])}}
                                 {{Form::hidden('emp_id','',['id' => 'empBox', 'class' => 'col-md-8 form-control'])}}
+                                {{Form::hidden('id','',['id' => 'idEditBox', 'class' => 'col-md-8 form-control'])}}
                             <div class="form-group row">
                                 {{Form::label('first_name', 'First Name',['class' => 'col-md-3 col-form-label', 'style' => 'font-weight: bold'])}}
                                 {{Form::text('first_name','',['id' => 'fnameBox', 'class' => 'col-md-8 form-control'])}}
@@ -42,19 +43,35 @@
                                 <!-- App checkboxes End-->
                             </div>
                             <div class="form-group row">
-                                <div class="col-md-9"></div>
-                                <div class="col-md-3">
-                                    {{Form::submit('Submit',['class' => 'btn btn-primary'])}}
+                                <div class="col-md-4"></div>
+                                <div class="col-md-4">
+                                    {{Form::submit('Submit',['class' => 'btn btn-primary mt-3'])}}
                                 </div>
                             </div>
                             {{Form::close()}}
                     </div>
-                    <div class="col-md-4">
-                        <div class="card">
+                    <div class="col-md-5">
+                        <div class="card" style="font-size: .9em">
                             <div class="card-header">Authorized Process</div>
-                            <table class="table text-center" id="userProcessTable"></table>
+                            <table class="table table-bordered text-center mb-0" id="userProcessTable">
+                                <thead>
+                                    <tr>
+                                        <th>Process</th>
+                                        <th>Delete</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="userProcessTableBody"></tbody>
+                            </table>
                             <div class="card-footer">
-                                <button>Add</button>
+                                <div class="row">
+                                    {{-- <div class="col-md-1"></div> --}}
+                                    <div class="col-md-6 offset-md-1">
+                                        {{Form::text('flexdata','',['id' => 'flexdata', 'placeholder' => 'add user to process', 'class' => 'form-control-sm'])}}
+                                    </div>
+                                    <div class="col-md-2 offset-md-1">
+                                        <button class="text-success" id="addBtn"><i class="fas fa-plus-circle fa-fw" title="add process"></i></button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
