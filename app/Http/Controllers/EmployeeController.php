@@ -97,14 +97,6 @@ class EmployeeController extends Controller
     public function edit($id)
     {
 
-        $userProcess = EmployeeProcess::with('process')->where('user_id','=',$id)->get();
-        // return dd($userProcess);
-        $data = [
-            'id' => $id,
-            'userProcess' => $userProcess
-        ];
-
-        return view('employees.edit')->with($data);
     }
 
     public function update(Request $request)
