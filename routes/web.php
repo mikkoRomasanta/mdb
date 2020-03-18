@@ -21,9 +21,9 @@ Auth::routes();
 Route::get('empDataTable', 'EmployeeController@getEmployees')->name('dt.emp');
 
 Route::get('employees', 'EmployeeController@index')->name('employees');
-Route::get('employees/{id}', 'EmployeeController@edit')->name('employees.edit');
-Route::post('employees/add', 'EmployeeController@store')->name('add.user');
 Route::get('employees/add','EmployeeController@create')->name('create.user');
+Route::post('employees/add', 'EmployeeController@store')->name('add.user');
+Route::get('employees/{id}', 'EmployeeController@edit')->name('employees.edit');
 Route::post('employees', 'EmployeeController@update');
 Route::get('appDataTable', 'EmployeeController@pluckApps')->name('pluck.app');
 Route::get('change-password', 'EmployeeController@changePasswordIndex');

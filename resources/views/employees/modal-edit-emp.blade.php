@@ -51,9 +51,9 @@
                             {{Form::close()}}
                     </div>
                     <div class="col-md-5">
-                        <div class="card" style="font-size: .9em">
+                        <div class="card" style="font-size: .8em">
                             <div class="card-header">Authorized Process</div>
-                            <table class="table table-bordered text-center mb-0" id="userProcessTable">
+                            <table class="table table-bordered table-responsive text-center mb-0" id="userProcessTable">
                                 <thead>
                                     <tr>
                                         <th>Process</th>

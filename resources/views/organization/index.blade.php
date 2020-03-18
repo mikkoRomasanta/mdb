@@ -5,7 +5,7 @@
 <div class="container">
     <div class="row">
         <div class="card shadow pt-2 pb-2 mr-4 col-md-7">
-            <table class="table table-condensed" id="processTable"  style="font-size: .8em" width="100%">
+            <table class="table table-condensed table-responsive" id="processTable"  style="font-size: .8em" width="100%">
                 <thead>
                     <tr id="filterRow">
                         <th></th>

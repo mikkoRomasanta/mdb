@@ -24,6 +24,11 @@
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
+    <style>
+        #userProcessTable{
+            display: inline-block;
+        }
+    </style>
 </head>
 <body>
     @if(Auth::guest())
