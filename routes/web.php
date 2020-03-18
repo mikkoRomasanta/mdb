@@ -22,6 +22,7 @@ Auth::routes();
 Route::get('empDataTable', 'EmployeeController@getEmployees')->name('dt.emp');
 
 Route::get('employees', 'EmployeeController@index')->name('employees');
+Route::get('employees/{id}', 'EmployeeController@edit')->name('employees.edit');
 Route::post('employees/add', 'EmployeeController@store')->name('add.user');
 Route::get('employees/add','EmployeeController@create')->name('create.user');
 Route::post('employees', 'EmployeeController@update');
@@ -31,6 +32,7 @@ Route::post('change-password', 'EmployeeController@changePass');
 Route::post('reset-password', 'EmployeeController@resetPass');
 Route::get('organization', 'ProcessController@index')->name('organization');
 Route::get('organization/{id}','ProcessController@showEmp')->name('show.users');
+Route::get('userProcess/{id}','EmployeeController@getUserProcess')->name('get.userProcess');
 // Route::post('organization/add-user','EmployeeProcess@newRecord')->name('store.empProcess');
 // Route::post('applist/delete','AppController@delete')->name('delete.app');
 

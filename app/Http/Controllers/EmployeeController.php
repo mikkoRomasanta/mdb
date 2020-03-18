@@ -40,11 +40,6 @@ class EmployeeController extends Controller
         
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         $user = Auth::user();
@@ -57,12 +52,6 @@ class EmployeeController extends Controller
         }
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $user = Auth::user();
@@ -100,35 +89,24 @@ class EmployeeController extends Controller
 
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Employee  $employee
-     * @return \Illuminate\Http\Response
-     */
     public function show(Employee $employee)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Employee  $employee
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Employee $employee)
+    public function edit($id)
     {
-        //
+
+        $userProcess = EmployeeProcess::with('process')->where('user_id','=',$id)->get();
+        // return dd($userProcess);
+        $data = [
+            'id' => $id,
+            'userProcess' => $userProcess
+        ];
+
+        return view('employees.edit')->with($data);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Employee  $employee
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request)
     {
         $user = Auth::user();
@@ -171,12 +149,6 @@ class EmployeeController extends Controller
         }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Employee  $employee
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Employee $employee)
     {
         //
@@ -278,6 +250,12 @@ class EmployeeController extends Controller
             return response('GTFOH!');
         }
         
+    }
+
+    public function getUserProcess($id){
+        $userProcess = EmployeeProcess::with('process')->where('user_id','=',$id)->get();
+
+        return $userProcess;
     }
     
 

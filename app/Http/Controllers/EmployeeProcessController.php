@@ -95,4 +95,17 @@ class EmployeeProcessController extends Controller
         //
     }
 
+<<<<<<< HEAD
+    public function getUserProcess($userId){
+        // $userProcess = EmployeeProcess::getUserProcess($userId);
+
+        // return $userProcess;
+
+        $userProcess = EmployeeProcess::where('user_id','=',$userId)->get();
+
+        return $userProcess;
+    }
+
+=======
+>>>>>>> f767090ca48bd6fc78681d340906ccf82573925b
 }

@@ -161,6 +161,7 @@
                         $('#lnameBox').val(data.last_name);
                         $('#emailBox').val(data.email);
                         $('#roleBox').val(data.role);
+                        var id = data.id;
                         
                         for(var x=0;x<apps.length;x++){//for every app; do this
                             $('#appBox'+x).prop('checked',false); //clear checkboxes 1st
@@ -171,6 +172,18 @@
                                 $('#appBox'+x).prop('checked',true); //check checkbox if bool is true
                             }
                         }
+
+                        $.get('{{url('userProcess')}}/' + id,function(data,status){
+                            var str = '';
+                            // alert(id);
+                            console.log(data);
+                            $.each( data, function( key, value ) {
+                                str += '<tr><td>'+value["process"]["process_name"]+'&emsp;&emsp;</td></tr>';
+                            });
+
+                            $('#userProcessTable').html(str);
+                            
+                        });
 
                     });
 
