@@ -11,12 +11,13 @@
 
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="{{asset('plugins/datatables/datatables.css')}}"/>
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/fixedcolumns/3.3.0/js/dataTables.fixedColumns.min.js">
+    {{-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/fixedcolumns/3.3.0/js/dataTables.fixedColumns.min.js"> --}}
     <link rel="stylesheet" href="{{ asset('plugins/flexdatalist/jquery.flexdatalist.min.css') }}" type="text/css">
 
     <script src="{{ asset('js/app.js') }}"></script>
     <script type="text/javascript" src="{{asset('plugins/datatables/datatables.js')}}"></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/fixedcolumns/3.2.1/js/dataTables.fixedColumns.min.js"></script>
+    {{-- <script type="text/javascript" src="https://cdn.datatables.net/fixedcolumns/3.2.1/js/dataTables.fixedColumns.min.js"></script> --}}
+    <script type="text/javascript" src="{{ asset('plugins/datatables/dataTables.fixedColumns.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('plugins/flexdatalist/jquery.flexdatalist.min.js') }}"></script>
 
     <!-- Fonts -->

@@ -27,16 +27,16 @@
                     </div>
                     <div class="form-check form-check-inline">
                         <!-- App checkboxes Start-->
-                        @for($i=0;$i<count($apps);$i++) <!-- count $apps from index.blade.php-->
-                            <div class="card">
-                                <div class="card-header p-2">
-                                    {{Form::label($apps[$i],'',['class' => 'form-check-label', 'style' => 'font-weight: bold'])}}
+                            @for($i=0;$i<count($apps);$i++) <!-- count $apps from index.blade.php-->
+                                <div class="card">
+                                    <div class="card-header p-2">
+                                        {{Form::label($apps[$i],'',['class' => 'form-check-label', 'style' => 'font-weight: bold'])}}
+                                    </div>
+                                    <div class="card-body p-2" align="center">
+                                        {{Form::checkbox('app['.$i.']',null,false,['id' => 'appBox'.$i, 'class' => 'form-check-input'])}}
+                                    </div>
                                 </div>
-                                <div class="card-body p-2" align="center">
-                                    {{Form::checkbox('app['.$i.']',null,false,['id' => 'appBox'.$i, 'class' => 'form-check-input'])}}
-                                </div>
-                            </div>
-                        @endfor
+                            @endfor
                         <!-- App checkboxes End-->
 
                     </div>
