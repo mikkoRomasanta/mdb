@@ -23,69 +23,52 @@ class EmployeeController extends Controller
 
     public function index()
     {
-        $user = Auth::user();
-        //using policy set at app>policies>EmployeePolicy
-        if($user->can('view', Employee::class)){ //if user is allowed to view then show employees.index
-            $apps = App::pluckApps();
+        $apps = App::pluckApps();
 
-            $data = [
-                'apps' => $apps
-            ];
+        $data = [
+            'apps' => $apps
+        ];
 
-            return view('employees.index')->with($data);
-        }else{
-            return response('GTFOH!');
-        }
+        return view('employees.index')->with($data);
 
         
     }
 
     public function create()
     {
-        $user = Auth::user();
-        if($user->can('create', Employee::class)){    
-            $process = Process::orderBy('process_name','ASC')->pluck('process_name','id');
+        $process = Process::orderBy('process_name','ASC')->pluck('process_name','id');
 
-            return view('employees.add-emp')->with('data',$process);
-        }else{
-            return response('GTFOH!');
-        }
+        return view('employees.add-emp')->with('data',$process);
     }
 
     public function store(Request $request)
-    {
-        $user = Auth::user();
-        if($user->can('create', Employee::class)){      
-            $validatedData = $request->validate([
-                'emp_id' => 'required|max:10|unique:employees,emp_id',
-                'first_name' => 'required|max:255',
-                'last_name' => 'required|max:255',
-                'email' => 'nullable|max:255|email'
-            ]);
+    { 
+        $validatedData = $request->validate([
+            'emp_id' => 'required|max:10|unique:employees,emp_id',
+            'first_name' => 'required|max:255',
+            'last_name' => 'required|max:255',
+            'email' => 'nullable|max:255|email'
+        ]);
 
-            $emp = new Employee();
-            $emp->emp_id = $request->emp_id;
-            $emp->first_name = $request->first_name;
-            $emp->last_name = $request->last_name;
-            $emp->email = $request->last_name;
-            $emp->role = $request->role;
+        $emp = new Employee();
+        $emp->emp_id = $request->emp_id;
+        $emp->first_name = $request->first_name;
+        $emp->last_name = $request->last_name;
+        $emp->email = $request->last_name;
+        $emp->role = $request->role;
 
-            $emp->save();
+        $emp->save();
 
-            $user_id = Employee::where('emp_id','=',$request->emp_id)->value('id');
+        $user_id = Employee::where('emp_id','=',$request->emp_id)->value('id');
 
-            $proc = new EmployeeProcess();
-            $proc->user_id = $user_id;
-            $proc->process_id = $request->process;
-            $proc->save();
+        $proc = new EmployeeProcess();
+        $proc->user_id = $user_id;
+        $proc->process_id = $request->process;
+        $proc->save();
 
-            $message = 'User ['.$request->emp_id.'] created successfully.';
-            
-            return redirect('/employees/add')->with('success', $message);
-        }else{
-            return response('GTFOH!');
-        }
-
+        $message = 'User ['.$request->emp_id.'] created successfully.';
+        
+        return redirect('/employees/add')->with('success', $message);
 
     }
 
@@ -101,44 +84,40 @@ class EmployeeController extends Controller
 
     public function update(Request $request)
     {
-        $user = Auth::user();
-        if($user->can('create', Employee::class)){
-            $validatedData = $request->validate([
-                'first_name' => 'required|max:255',
-                'last_name' => 'required|max:255',
-                'email' => 'nullable|max:255|email'
-            ]);
+        $validatedData = $request->validate([
+            'first_name' => 'required|max:255',
+            'last_name' => 'required|max:255',
+            'email' => 'nullable|max:255|email'
+        ]);
+        
+        $emp = Employee::where('emp_id', '=', $request->emp_id)->first();
+        $apps = App::pluckApps(); //get all apps (add active? if needed)
+        $appCount = $apps->count(); //count # of apps
+
+        for($i=0;$i<$appCount;$i++){ //loop through all apps
+            $app = strtolower($apps[$i]); //lowercase the appname
             
-            $emp = Employee::where('emp_id', '=', $request->emp_id)->first();
-            $apps = App::pluckApps(); //get all apps (add active? if needed)
-            $appCount = $apps->count(); //count # of apps
+            if(isset($request->app[$i])){ //if checkbox is on
 
-            for($i=0;$i<$appCount;$i++){ //loop through all apps
-                $app = strtolower($apps[$i]); //lowercase the appname
-                
-                if(isset($request->app[$i])){ //if checkbox is on
-
-                    $emp[$app] = 1; //basically same as $emp->appName = 1;
-                }
-                else{
-                    $emp[$app] = 0;
-                }
+                $emp[$app] = 1; //basically same as $emp->appName = 1;
             }
-
-            $emp->emp_id = $request->emp_id; //should we allow changing of emp_id? emp_id is unique in the database
-            $emp->first_name = $request->first_name;
-            $emp->last_name = $request->last_name;
-            $emp->email = $request->email;
-            $emp->role = $request->role;
-
-            $emp->save();
-
-            $message = 'User ['.$request->emp_id.'] updated successfully.';
-
-            return redirect('/employees')->with('success', $message);
-        }else{
-            return response('GTFOH!');
+            else{
+                $emp[$app] = 0;
+            }
         }
+
+        $emp->emp_id = $request->emp_id; //should we allow changing of emp_id? emp_id is unique in the database
+        $emp->first_name = $request->first_name;
+        $emp->last_name = $request->last_name;
+        $emp->email = $request->email;
+        $emp->role = $request->role;
+
+        $emp->save();
+
+        $message = 'User ['.$request->emp_id.'] updated successfully.';
+
+        return redirect('/employees')->with('success', $message);
+
     }
 
     public function destroy(Employee $employee)
@@ -218,29 +197,24 @@ class EmployeeController extends Controller
     }
 
     public function resetPass(Request $request){
-        $user = Auth::user();
-        if($user->can('resetPass', Employee::class)){    
-            $emp = Employee::findOrFail($request->id); //get selected user info
-            $pass = $request->reset_pass_base.$request->reset_pass_suffix; //combine pass + random 3 digit number
-            $emp->password  = Hash::make($pass);
-            $emp->status = 'TEMP'; //TEMP = indicator that user has a temporary password.
-            $emp->save();
+        $emp = Employee::findOrFail($request->id); //get selected user info
+        $pass = $request->reset_pass_base.$request->reset_pass_suffix; //combine pass + random 3 digit number
+        $emp->password  = Hash::make($pass);
+        $emp->status = 'TEMP'; //TEMP = indicator that user has a temporary password.
+        $emp->save();
 
-            if(is_null($request->email)){ //if user has no email
+        if(is_null($request->email)){ //if user has no email
 
-                $message = 'User ['.$request->emp_id.'] updated successfully. New password is: '.$pass;
-                return redirect('/employees')->with('success', $message);
-            }
-            else{
-                    $emp->tempPass = $pass;
-                // $emp->notify(new ResetPassword($emp)); //send email notif. follow App\Notifications\ResetPassword;
-
-               $message = 'Email sent to User ['.$request->emp_id.']';
-               return redirect('/employees')->with('success', $message);
-            }        
-        }else{
-            return response('GTFOH!');
+            $message = 'User ['.$request->emp_id.'] updated successfully. New password is: '.$pass;
+            return redirect('/employees')->with('success', $message);
         }
+        else{
+                $emp->tempPass = $pass;
+            // $emp->notify(new ResetPassword($emp)); //send email notif. follow App\Notifications\ResetPassword;
+
+            $message = 'Email sent to User ['.$request->emp_id.']';
+            return redirect('/employees')->with('success', $message);
+        }        
         
     }
 
