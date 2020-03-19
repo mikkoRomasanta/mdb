@@ -43,9 +43,18 @@
                 </div>
             </div>
             <div class="card-body">
-                <div id="usersLabel" class="font-weight-bold small"></div>
+                <div id="usersLabel" class="font-weight-bold small text-center"></div>
                 {{Form::hidden('process_id','',['id' => 'process_id'])}}
-                <table id="usersTable" class="small"></table>
+                <table id="usersTable" class="table-sm table-bordered table-responsive text-center small">
+                    <thead>
+                        <tr>
+                            <th width="25%">Emp ID</th>
+                            <th width="60%">Name</th>
+                            <th width="20%">Delete</th>
+                        </tr>
+                    </thead>
+                    <tbody id="userProcessTableBody"></tbody>
+                </table>
             </div>
         </div>
     </div>
@@ -101,13 +110,15 @@
             $('#process_id').val(id);
             $.get('{{url('organization')}}/' + id,function(data,status){
                 var str = '';
-                // console.log(data);
+                console.log(data);
                 $.each( data, function( key, value ) {
-                    str += '<tr><td>'+value["employees"][0]["emp_id"]+'&emsp;&emsp;</td><td>'
-                    +value["employees"][0]["last_name"]+' '+value["employees"][0]["first_name"]+'</td></tr>';
+                    str += '<tr><td hidden="hidden">'+value["id"]+'</td><td>'+
+                    value["employees"][0]["emp_id"]+'&emsp;&emsp;</td><td>'
+                    +value["employees"][0]["last_name"]+' '+value["employees"][0]["first_name"]+'</td><td>'+
+                    '<button class="text-danger" id="delBtn"><i class="fas fa-minus-circle fa-fw" title="delete process"></i></button></td></tr>';
                 });
 
-                $('#usersTable').html(str);
+                $('#userProcessTableBody').html(str);
                 
             });
 
@@ -151,6 +162,33 @@
                     location.reload();
                 },
             });
+        });
+
+        //delete user process
+        $('#usersTable tbody').on( 'click', '#delBtn', function () { //remove process from user
+            var x = confirm('Are you sure you want to remove the process?');
+            if(x != true){
+                e.preventDefault();
+            }else{
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+                var empProcess_id = $(this).closest('tr').children('td:eq(0)').text();
+
+                $.ajax({
+                    type: "POST",
+                    url: "{{route('del.userProcess')}}",
+                    data: {
+                        'empProcess_id':empProcess_id,
+                    },
+                    success:function(data) {
+                        alert('Process successfully deleted');
+                        location.reload();
+                    },
+                });
+            }            
         });
 
     });
