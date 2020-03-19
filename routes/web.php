@@ -19,26 +19,26 @@ Auth::routes();
 
 Route::middleware('admin')->group(function(){
 
-Route::get('empDataTable', 'EmployeeController@getEmployees')->name('dt.emp');
+    Route::get('empDataTable', 'EmployeeController@getEmployees')->name('dt.emp');
 
-Route::get('employees', 'EmployeeController@index')->name('employees');
-Route::get('employees/add','EmployeeController@create')->name('create.user');
-Route::post('employees/add', 'EmployeeController@store')->name('add.user');
-Route::get('employees/{id}', 'EmployeeController@edit')->name('employees.edit');
-Route::post('employees', 'EmployeeController@update');
-Route::get('appDataTable', 'EmployeeController@pluckApps')->name('pluck.app');
-Route::get('organization', 'ProcessController@index')->name('organization');
-Route::get('organization/{id}','ProcessController@showEmp')->name('show.users');
-Route::get('userProcess/{id}','EmployeeController@getUserProcess')->name('get.userProcess');
-Route::get('getAllProcess','ProcessController@getAllProcess');
-Route::post('DeletUserProcess', 'EmployeeProcessController@deleteUserProcess')->name('del.userProcess');
+    Route::get('employees', 'EmployeeController@index')->name('employees');
+    Route::get('employees/add','EmployeeController@create')->name('create.user');
+    Route::post('employees/add', 'EmployeeController@store')->name('add.user');
+    Route::get('employees/{id}', 'EmployeeController@edit')->name('employees.edit');
+    Route::post('employees', 'EmployeeController@update');
+    Route::get('appDataTable', 'EmployeeController@pluckApps')->name('pluck.app');
+    Route::get('organization', 'ProcessController@index')->name('organization');
+    Route::get('organization/{id}','ProcessController@showEmp')->name('show.users');
+    Route::get('userProcess/{id}','EmployeeController@getUserProcess')->name('get.userProcess');
+    Route::get('getAllProcess','ProcessController@getAllProcess');
+    Route::post('DeletUserProcess', 'EmployeeProcessController@deleteUserProcess')->name('del.userProcess');
 
-Route::resource('employeeProcess', 'EmployeeProcessController');
-Route::resource('apps', 'AppController');
+    Route::resource('employeeProcess', 'EmployeeProcessController');
+    Route::resource('apps', 'AppController');
 });
 
 // -----------CHANGE PASS--------------
-Route::get('change-password', 'EmployeeController@changePasswordIndex');
+Route::get('change-password', 'EmployeeController@changePasswordIndex')->name('change.pass');
 Route::post('change-password', 'EmployeeController@changePass');
 Route::post('reset-password', 'EmployeeController@resetPass');
 

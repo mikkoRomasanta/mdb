@@ -15,5 +15,8 @@ class Employee extends Authenticatable
         return $this->hasMany('App\Models\EmployeeProcess','user_id','id');
     }
 
+    public function passwordResets(){
+        return $this->hasMany('App\Models\PasswordResets,emp_id','emp_id');
+    }
     
 }

@@ -145,6 +145,7 @@ class EmployeeController extends Controller
             $proc_id[$i] = $proc[$i]['process_id'];
             $org[$i] = Process::with('department','division')->where('id','=',$proc_id[$i])->first();
         }
+
         // return dd($proc_id);
         // $org = Process::with(['dept' => function ($q){$q->where('id','=',8);}])->where('id','=',$proc_id)->get();
         // $org = Process::with('department','division')->where('id','=',$proc_id)->get();
