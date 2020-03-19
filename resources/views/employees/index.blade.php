@@ -177,7 +177,7 @@
                         $.get('{{url('userProcess')}}/' + id,function(data,status){ //processes of selected user
                             var str = '';
                             // alert(id);
-                            console.log(data);
+                            // console.log(data);
                             $.each( data, function( key, value ) { //add rows for every process
                                 str += '<tr><td hidden="hidden">'+value["id"]+'</td><td>'+value["process"]["process_name"]+'&emsp;&emsp;</td><td>'+
                                 '<button class="text-danger" id="delBtn"><i class="fas fa-minus-circle fa-fw" title="delete process"></i></button></td></tr>';

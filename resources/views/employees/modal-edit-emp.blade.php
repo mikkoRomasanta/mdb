@@ -53,11 +53,11 @@
                     <div class="col-md-5">
                         <div class="card" style="font-size: .8em">
                             <div class="card-header">Authorized Process</div>
-                            <table class="table table-bordered table-responsive text-center mb-0" id="userProcessTable">
+                            <table class="table-sm table-bordered table-responsive text-center mb-0" id="userProcessTable">
                                 <thead>
                                     <tr>
-                                        <th>Process</th>
-                                        <th>Delete</th>
+                                        <th width="90%">Process</th>
+                                        <th width="20%">Delete</th>
                                     </tr>
                                 </thead>
                                 <tbody id="userProcessTableBody"></tbody>
