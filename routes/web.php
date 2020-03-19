@@ -17,6 +17,7 @@ Route::get('/', function () {
 
 Auth::routes();
 
+Route::middleware('admin')->group(function(){
 
 Route::get('empDataTable', 'EmployeeController@getEmployees')->name('dt.emp');
 
@@ -26,9 +27,6 @@ Route::post('employees/add', 'EmployeeController@store')->name('add.user');
 Route::get('employees/{id}', 'EmployeeController@edit')->name('employees.edit');
 Route::post('employees', 'EmployeeController@update');
 Route::get('appDataTable', 'EmployeeController@pluckApps')->name('pluck.app');
-Route::get('change-password', 'EmployeeController@changePasswordIndex');
-Route::post('change-password', 'EmployeeController@changePass');
-Route::post('reset-password', 'EmployeeController@resetPass');
 Route::get('organization', 'ProcessController@index')->name('organization');
 Route::get('organization/{id}','ProcessController@showEmp')->name('show.users');
 Route::get('userProcess/{id}','EmployeeController@getUserProcess')->name('get.userProcess');
@@ -37,8 +35,16 @@ Route::post('DeletUserProcess', 'EmployeeProcessController@deleteUserProcess')->
 
 Route::resource('employeeProcess', 'EmployeeProcessController');
 Route::resource('apps', 'AppController');
+});
+
+// -----------CHANGE PASS--------------
+Route::get('change-password', 'EmployeeController@changePasswordIndex');
+Route::post('change-password', 'EmployeeController@changePass');
+Route::post('reset-password', 'EmployeeController@resetPass');
 
 Route::get('preview-emails', function () {
     $message = (new \App\Notifications\ResetPassword(\App\Models\Employee::find(1)))->toMail('test@test.com');
     return $message->render();
 }); //to preview Reset Password email. change $emp->tempPass @ App\Notifications\ResetPassword
+
+// -----------CHANGE PASS--------------

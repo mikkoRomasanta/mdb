@@ -110,7 +110,7 @@
             $('#process_id').val(id);
             $.get('{{url('organization')}}/' + id,function(data,status){
                 var str = '';
-                console.log(data);
+                // console.log(data);
                 $.each( data, function( key, value ) {
                     str += '<tr><td hidden="hidden">'+value["id"]+'</td><td>'+
                     value["employees"][0]["emp_id"]+'&emsp;&emsp;</td><td>'
