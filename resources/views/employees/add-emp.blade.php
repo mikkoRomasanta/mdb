@@ -6,8 +6,8 @@
         <div class="col-md-3"></div>
         <div class="col-md-6">
             <div class="card">
-                <div class="card-header">Add New User</div>
-                <div class="card-body">
+                <div class="card-header theme-bg theme-color"><strong>Add New User</strong></div>
+                <div class="card-body theme-color-rev">
                 {{Form::open(['action' => 'EmployeeController@store', 'method' => 'POST'])}}
                     <div class="form-group row">
                         {{Form::label('emp_id', 'Emp ID',['class' => 'col-md-3 col-form-label', 'style' => 'font-weight: bold;'])}}
@@ -36,7 +36,7 @@
                     <div class="form-group row">
                         <div class="col-md-9"></div>
                         <div class="col-md-3">
-                            {{Form::submit('Submit',['class' => 'btn btn-primary'])}}
+                            {{Form::submit('Submit',['class' => 'btn theme-btn'])}}
                         </div>
                     </div>
                     {{Form::close()}}

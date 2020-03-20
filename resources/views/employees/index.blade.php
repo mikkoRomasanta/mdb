@@ -3,9 +3,9 @@
 @section('content')
     <div class="container">
         <div class="empDataTable">
-            <table class="table table-striped display nowarp" id="empTable"  style="width:100%;line-height: 1em;">
+            <table class="table display nowarp theme-bg-rev theme-color-rev" id="empTable"  style="width:100%; line-height: 1em;">
                 <thead>
-                    <tr class="bg-gradient-secondary text-white" id="filterRow">
+                    <tr class="theme-bg" id="filterRow" style="font-size: .9em;">
                         <th></th>
                         <th></th>
                         <th></th>
@@ -18,7 +18,7 @@
                         @endforeach
                     </tr>
                     <tr>
-                        <th style="color: white; background-color:gray">Actions</th>
+                        <th>Actions</th>
                         <th>Emp ID</th>
                         <th>Name</th>
                         <th>Last Name</th>
