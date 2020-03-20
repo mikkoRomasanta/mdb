@@ -24,18 +24,13 @@
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
-    <style>
-        #userProcessTable{
-            display: inline-block;
-        }
-    </style>
 </head>
-<body>
+<body style="background-color: #dcdbe1">
     @if(Auth::guest())
         @include('auth.login')
     @else
         <div id="app">
-            <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+            <nav class="navbar navbar-expand-md theme-bg theme-link shadow-sm">
                 <div class="container">
                     <a class="navbar-brand" href="{{ url('/') }}">
                         {{ config('app.name', 'NERDS') }}
@@ -79,7 +74,7 @@
                                         {{ Auth::user()->emp_id }} <span class="caret"></span>
                                     </a>
 
-                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    <div class="dropdown-menu dropdown-menu-right theme-bg-rev" aria-labelledby="navbarDropdown">
                                         <a class="dropdown-item" href="{{route('change.pass')}}">Change Password</a>
                                         <hr>
                                         <a class="dropdown-item" href="{{ route('logout') }}"

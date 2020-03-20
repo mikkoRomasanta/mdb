@@ -17308,6 +17308,10 @@ body {
   height: 100%;
 }
 
+.card-body .form-control {
+  background-color: #c5d7d9 !important;
+}
+
 #empTable_length {
   padding-top: 0.755rem;
 }
@@ -17334,7 +17338,71 @@ td {
   white-space: nowrap;
 }
 
-tr[role=row] {
-  background: white;
+a {
+  color: #FFA500;
+}
+
+a:hover {
+  color: white;
+}
+
+.theme-bg {
+  background-color: #008080 !important;
+}
+
+.theme-color {
+  color: #FFA500 !important;
+}
+
+.theme-bg-light {
+  background: #66b2b2 !important;
+}
+
+.theme-bg-rev {
+  background-color: #FFA500 !important;
+}
+
+.theme-color-rev {
+  color: #008080 !important;
+}
+
+.theme-link a {
+  color: white !important;
+}
+
+.theme-link a:hover {
+  color: #FFA500 !important;
+}
+
+.theme-btn {
+  background-color: #008080 !important;
+  color: white !important;
+}
+
+.dataTables_paginate {
+  color: white !important;
+}
+
+.paginate_button {
+  background: none !important;
+  background-color: #7dbbb9 !important;
+  color: white !important;
+}
+
+.dataTables_filter input {
+  background-color: #c5d7d9 !important;
+}
+
+.dt-button {
+  line-height: 1em !important;
+  color: white !important;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#7dbbb9), to(#7dbbb9)) !important;
+  background-image: linear-gradient(#7dbbb9, #7dbbb9) !important;
+}
+
+.dt-button:hover {
+  color: #008080 !important;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#FFA500), to(#FFA500)) !important;
+  background-image: linear-gradient(#FFA500, #FFA500) !important;
 }
 
