@@ -13,6 +13,8 @@ use Illuminate\Support\Facades\Hash;
 use App\Notifications\ResetPassword;
 use Auth;
 use DB;
+use App\Exports\EmployeesExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class EmployeeController extends Controller
 {
@@ -147,8 +149,8 @@ class EmployeeController extends Controller
             $org[$i] = Process::with('department','division')->where('id','=',$proc_id[$i])->first();
         }
 
-        $numOfReset = PasswordResets::where('emp_id','=',$user->emp_id)->where('reset','=',1)->orderBy('created_at','DESC')->count();
-        $dateOfLastChange = PasswordResets::where('emp_id','=',$user->emp_id)->where('reset','=',0)->orderBy('created_at','DESC')->first();
+        $numOfReset = PasswordResets::where('emp_id','=',$user->emp_id)->where('reset','=',1)->orderBy('created_at','DESC')->count(); //count # of resets
+        $dateOfLastChange = PasswordResets::where('emp_id','=',$user->emp_id)->where('reset','=',0)->orderBy('created_at','DESC')->first(); //get latest password change
         // return dd($dateOfLastChange);
         if($dateOfLastChange == null){
             $dateOfLastChange['created_at'] = 'N/a'; 
@@ -239,6 +241,9 @@ class EmployeeController extends Controller
 
         return $userProcess;
     }
-    
 
+    public function exportEmployees(){
+        return Excel::download(new EmployeesExport,'emp.xlsx');
+    }
+    
 }

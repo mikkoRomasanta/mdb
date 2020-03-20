@@ -48,3 +48,5 @@ Route::get('preview-emails', function () {
 }); //to preview Reset Password email. change $emp->tempPass @ App\Notifications\ResetPassword
 
 // -----------CHANGE PASS--------------
+
+Route::get('export-employees', 'EmployeeController@exportEmployees')->name('export.emp');
