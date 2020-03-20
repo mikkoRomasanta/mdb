@@ -16,6 +16,7 @@ class CreatePasswordResetsTable extends Migration
         Schema::create('password_resets', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('emp_id');
+            $table->boolean('reset')->default(1)->comment('1=reset,0=change');
             $table->timestamps();
         });
     }

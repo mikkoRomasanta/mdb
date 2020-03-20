@@ -59,8 +59,8 @@
         <div class="col-md-3">
             Additonal Info
             <hr>
-            <p><small>Date of last password reset</small></p>
-            <p><small># of password reset?</small></p>
+            <p><small><strong>Change Password Date:</strong> {{$changeDate['created_at']}}</small></p>
+            <p><small><strong># of Password Reset:</strong> {{$resetNum}}</small></p>
         </div>
     </div>
 </div>

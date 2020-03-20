@@ -6,6 +6,7 @@ use App\Models\Employee;
 use App\Models\App;
 use App\Models\EmployeeProcess;
 use App\Models\Process;
+use App\Models\PasswordResets;
 use App\Rules\ConfirmOldPassword;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -146,6 +147,14 @@ class EmployeeController extends Controller
             $org[$i] = Process::with('department','division')->where('id','=',$proc_id[$i])->first();
         }
 
+        $numOfReset = PasswordResets::where('emp_id','=',$user->emp_id)->where('reset','=',1)->orderBy('created_at','DESC')->count();
+        $dateOfLastChange = PasswordResets::where('emp_id','=',$user->emp_id)->where('reset','=',0)->orderBy('created_at','DESC')->first();
+        // return dd($dateOfLastChange);
+        if($dateOfLastChange == null){
+            $dateOfLastChange['created_at'] = 'N/a'; 
+        }
+
+        // return dd($dateOfLastChange);
         // return dd($proc_id);
         // $org = Process::with(['dept' => function ($q){$q->where('id','=',8);}])->where('id','=',$proc_id)->get();
         // $org = Process::with('department','division')->where('id','=',$proc_id)->get();
@@ -165,7 +174,9 @@ class EmployeeController extends Controller
             'emp' => $emp,
             'apps' => $apps,
             'proc' => $proc,
-            'org' => $org
+            'org' => $org,
+            'resetNum' => $numOfReset,
+            'changeDate' => $dateOfLastChange
         ];
 
 
@@ -189,12 +200,14 @@ class EmployeeController extends Controller
         $emp->status = 'ACTIVE'; // will activate INACTIVE / TEMP users
         $emp->save();
 
+        PasswordResets::newRecord($emp->emp_id,false); //true for reset, false if change pass
+
         // return response()->json(['result' => $newPassword.' '.$userId]);
 
         Auth::logout();
 
         $message = 'User ['.$userAuth->emp_id.'] updated successfully.';
-        return redirect('/login')->with('success', $message);
+        return redirect('/')->with('success', $message);
     }
 
     public function resetPass(Request $request){
@@ -203,6 +216,8 @@ class EmployeeController extends Controller
         $emp->password  = Hash::make($pass);
         $emp->status = 'TEMP'; //TEMP = indicator that user has a temporary password.
         $emp->save();
+
+        PasswordResets::newRecord($emp->emp_id,true); //true for reset, false if change pass
 
         if(is_null($request->email)){ //if user has no email
 
