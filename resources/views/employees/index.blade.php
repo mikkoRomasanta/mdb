@@ -97,7 +97,13 @@
                             "<'row'<'col-md-12't>>" +
                             "<'row'<'col-md-3' l><'col-md-3'i><'col-md-6'p>>",
                     buttons: [
-                        'excel',
+                        {
+                            text: 'Export',
+                            className: 'dt-middle-button',
+                            action: function ( e, dt, node, config ) {
+                                window.location = '{{ route("export.emp") }}'
+                            }
+                        },
                         {
                             text: 'Add Users',
                             className: 'dt-middle-button',
