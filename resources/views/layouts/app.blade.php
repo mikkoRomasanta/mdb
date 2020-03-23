@@ -25,7 +25,7 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
 </head>
-<body style="background-color: #dcdbe1">
+<body style="background-color: #dcdbe1"> 
     @if(Auth::guest())
         @include('auth.login')
     @else

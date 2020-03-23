@@ -1,12 +1,12 @@
 <div class="modal fade" id="mdlResetWith" role="dialog">
     <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header color-bg-main color-font-dark">
+            <div class="modal-header theme-bg theme-color">
                 <h4 class="modal-title" id="mdlTitleReset"></h4>
                 <button type="button" class="close" data-dismiss="modal">
                 <span aria-hidden="true">&times;</span></button>
             </div>
-            <div class="modal-body">
+            <div class="modal-body theme-color-rev">
                 {{Form::open(['action' => 'EmployeeController@resetPass', 'method' => 'POST'])}}
                         {{Form::hidden('id','',['id' => 'idBox', 'class' => 'col-md-6 form-control', 'readonly'])}}
                         {{Form::hidden('emp_id','',['id' => 'empIdBox', 'class' => 'col-md-6 form-control', 'readonly'])}}
@@ -24,7 +24,7 @@
                             </div>
                         </div>
                         <div class="col-md-3">
-                            {{Form::submit('Reset',['class' => 'btn btn-primary'])}}
+                            {{Form::submit('Reset',['class' => 'btn btn-primary theme-btn'])}}
                         </div>
                     </div>
 

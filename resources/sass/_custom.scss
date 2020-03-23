@@ -2,18 +2,33 @@ html,body{
     height:100%;
 }
 
-.card-body .form-control{
-    background-color:#c5d7d9 !important;
+a{
+    color: #FFA500;
 }
 
-
-#empTable_length{
-    padding-top: .755rem; //datatables
+a:hover{
+    color: white;
 }
 
 hr{
     padding: 0px;
     margin: 0px;    
+}
+
+input{
+    background-color:#c5d7d9; 
+}
+
+.card-body .form-control{
+    background-color:#c5d7d9 !important;
+}
+
+.modal-body .form-control{
+    background-color:#c5d7d9 !important;
+}
+
+#empTable_length{
+    padding-top: .755rem; //datatables
 }
 
 .small-icon{
@@ -31,18 +46,6 @@ hr{
 
 #empTable th, td {
     white-space: nowrap;
-}
-
-// tr[role=row] {
-//     background:white;
-// }
-
-a{
-    color: #FFA500;
-}
-
-a:hover{
-    color: white;
 }
 
 .theme-bg{
@@ -75,10 +78,24 @@ a:hover{
 
 .theme-btn{
     background-color: #008080 !important;
+    color: white  !important;
+}
+
+.theme-btn:hover{
+    background-color: #FFA500 !important;
+    color: white !important;
+}
+.theme-btn-rev{
+    background-color: #FFA500 !important;
     color: white !important;
 }
 
-.dataTables_paginate{
+.theme-btn-rev:hover{
+    background-color: #008080 !important;
+    color: white  !important;
+}
+
+.dataTables_paginate > .paginate_button{ //NG
     color:white !important;
 }
 

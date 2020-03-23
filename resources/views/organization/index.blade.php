@@ -5,7 +5,7 @@
 <div class="container">
     <div class="row">
         <div class="card shadow pt-2 pb-2 mr-4 col-md-7">
-            <table class="table table-condensed table-responsive" id="processTable"  style="font-size: .8em" width="100%">
+            <table class="table table-condensed table-responsive theme-bg theme-color" id="processTable"  style="font-size: .8em" width="100%">
                 <thead>
                     <tr id="filterRow">
                         <th></th>
@@ -20,7 +20,7 @@
                         <th>Process</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody class="theme-color-rev">
                     @foreach($data as $org)
                         <tr>
                             <td class="text-center text-info"><button class="btn btn-sm text-info "id="viewBtn" value="{{$org->id}}"><i class="fa fa-eye"></i></button></td>
@@ -33,7 +33,7 @@
             </table>
         </div>
         <div class="card shadow col-md-4 p-0" width="100%">
-            <div class="card-header">
+            <div class="card-header theme-bg theme-color">
                 <div class="row">
                     <div class="col-md-4"><strong>USERS</strong></div>
                     <div class="col-md-6">
@@ -42,8 +42,8 @@
                     <div class="col-md-2"><button class="text-success" id="addBtn"><i class="fas fa-plus-circle fa-fw" title="add user"></i></button></div>
                 </div>
             </div>
-            <div class="card-body">
-                <div id="usersLabel" class="font-weight-bold small text-center"></div>
+            <div class="card-body theme-color-rev">
+                <div id="usersLabel" class="font-weight-bold small text-center theme-bg-rev"></div>
                 {{Form::hidden('process_id','',['id' => 'process_id'])}}
                 <table id="usersTable" class="table-sm table-bordered table-responsive text-center small">
                     <thead>
