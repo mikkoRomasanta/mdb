@@ -65,7 +65,7 @@
                 }
 
                 var builtColumns = [ //column template to be used in DT
-                    { "defaultContent": "<a href='#' class='btn btn-success btn-sm small-icon' id='editBtn' title='edit'><i class='fas fa-edit fa-fw'></i></a> <a href='#' class='btn btn-warning btn-sm small-icon' id='resetBtn' title='reset password'><i class='fas fa-undo-alt fa-fw'></i></a>"},
+                    { "defaultContent": "<a href='#' class='btn btn-success btn-sm small-icon theme-btn' id='editBtn' title='edit'><i class='fas fa-edit fa-fw'></i></a> <a href='#' class='btn btn-warning btn-sm small-icon theme-btn-rev' id='resetBtn' title='reset password'><i class='fas fa-undo-alt fa-fw'></i></a>"},
                     {'data' : 'emp_id'},
                     {'data' : 'first_name'},
                     {'data' : 'last_name'},

@@ -1,11 +1,11 @@
 
 {{-- <div class="container" style="background-color:red"> --}}
-    <div class="row h-100 align-items-center justify-content-center">
+    <div class="row h-100 align-items-center justify-content-center theme-bg-rev">
         <div class="col-4">
             <div class="card">
-                <div class="card-header">{{ __('Login') }}</div>
+                <div class="card-header theme-bg theme-color p-1 text-center"><h4>{{ __('Login') }}</h4></div>
 
-                <div class="card-body">
+                <div class="card-body theme-color-rev">
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
 
@@ -51,7 +51,7 @@
 
                         <div class="form-group row mb-0">
                             <div class="col-md-12">
-                                <button type="submit" class="btn btn-primary btn-block">
+                                <button type="submit" class="btn btn-primary btn-block theme-btn">
                                     {{ __('Login') }}
                                 </button>
 

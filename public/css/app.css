@@ -17308,17 +17308,33 @@ body {
   height: 100%;
 }
 
-.card-body .form-control {
-  background-color: #c5d7d9 !important;
+a {
+  color: #FFA500;
 }
 
-#empTable_length {
-  padding-top: 0.755rem;
+a:hover {
+  color: white;
 }
 
 hr {
   padding: 0px;
   margin: 0px;
+}
+
+input {
+  background-color: #c5d7d9;
+}
+
+.card-body .form-control {
+  background-color: #c5d7d9 !important;
+}
+
+.modal-body .form-control {
+  background-color: #c5d7d9 !important;
+}
+
+#empTable_length {
+  padding-top: 0.755rem;
 }
 
 .small-icon {
@@ -17336,14 +17352,6 @@ hr {
 #empTable th,
 td {
   white-space: nowrap;
-}
-
-a {
-  color: #FFA500;
-}
-
-a:hover {
-  color: white;
 }
 
 .theme-bg {
@@ -17379,7 +17387,22 @@ a:hover {
   color: white !important;
 }
 
-.dataTables_paginate {
+.theme-btn:hover {
+  background-color: #FFA500 !important;
+  color: white !important;
+}
+
+.theme-btn-rev {
+  background-color: #FFA500 !important;
+  color: white !important;
+}
+
+.theme-btn-rev:hover {
+  background-color: #008080 !important;
+  color: white !important;
+}
+
+.dataTables_paginate > .paginate_button {
   color: white !important;
 }
 

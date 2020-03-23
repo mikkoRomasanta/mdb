@@ -3,7 +3,7 @@
 @section('content')
 
 <div class="container">
-    <button type="button" data-toggle="modal" data-target="#mdlCreateApp" style="margin-bottom: .5em;">
+    <button type="button" data-toggle="modal" data-target="#mdlCreateApp" style="margin-bottom: .5em;" class="btn theme-btn">
         Create App
     </button>
     <hr style="margin-bottom: .5em;">
@@ -13,7 +13,7 @@
                 @foreach($chunk as $app)
                     <div class="col-md-3">
                         <div class="card text-center">
-                            <div class="card-header">                                
+                            <div class="card-header theme-bg theme-color">                                
                                 {{-- {{Form::open(['action' => 'AppController@delete', 'method' => 'POST'])}} --}}
                                     {{Form::hidden('appName',$app,['readonly'])}}
                                 
@@ -22,7 +22,7 @@
                                     {{-- {{Form::button('<i class="fa fa-trash"></i>',['type' => 'submit','class' => 'float-right text-danger', 'title' => 'Delete'])}} --}}
                                 {{-- {{Form::close()}} --}}
                             </div>
-                            <div class="card-body">
+                            <div class="card-body theme-color-rev">
                                 <div class="row">
                                     <div class="col-md-12">Users: {{$count[strToLower($app)]}}</div>
                                 </div>
