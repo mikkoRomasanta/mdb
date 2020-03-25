@@ -40,7 +40,7 @@
                             <div class="col-2"></div>
                             <div class="col-8">
                                 {{Form::label('new_password', 'New Password')}}
-                                {{Form::password('new_password',['class' => 'form-control text-center', 'placeholder' => 'Minimum of 6 characters'])}}
+                                {{Form::password('new_password',['class' => 'form-control text-center', 'placeholder' => 'minimum of 6 characters'])}}
                             </div>
                         </div>
                         <div class="form-group form-row">
