@@ -100,6 +100,7 @@
                 @yield('modal')
             </main>
         </div>
+    
 
         @stack('scripts')
     @endif

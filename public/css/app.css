@@ -17326,6 +17326,17 @@ input {
   background-color: #c5d7d9;
 }
 
+.footer {
+  position: absolute;
+  bottom: 0;
+  height: 1.5em;
+  font-size: 0.8em;
+  background-color: #FFA500;
+  width: 100%;
+  text-align: center;
+  color: black;
+}
+
 .card-body .form-control {
   background-color: #c5d7d9 !important;
 }
