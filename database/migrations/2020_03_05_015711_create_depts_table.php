@@ -17,6 +17,8 @@ class CreateDeptsTable extends Migration
             $table->bigIncrements('id');
             $table->string('department_name',50);
             $table->string('department_status',10)->default('ACTIVE');
+            $table->string('department_head',10)->nullable();
+            $table->string('assistant_department_head',10)->nullable();
         });
     }
 

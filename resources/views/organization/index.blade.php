@@ -11,13 +11,14 @@
                         <th></th>
                         <th></th>
                         <th></th>
-                        <th></th>
+                        <th hidden="true"></th>
                     </tr>
                     <tr>
                         <th>Action</th>
                         <th>Division</th>
                         <th>Department</th>
                         <th>Process</th>
+                        <th hidden="true">test</th>
                     </tr>
                 </thead>
                 <tbody class="theme-color-rev">
@@ -27,6 +28,7 @@
                             <td>{{$org->division->division_name}}</td>
                             <td>{{$org->department->department_name}}</td>
                             <td>{{$org->process_name}}</td>
+                            <td hidden="true">{{$org->department->department_head}}</td>
                         </tr>
                     @endforeach
                 </tbody>
@@ -55,6 +57,9 @@
                     </thead>
                     <tbody id="userProcessTableBody"></tbody>
                 </table>
+            </div>
+            <div class="card-footer">
+                <div><small><strong>Dept Head: </strong><span id="deptHead"></span></small></div>
             </div>
         </div>
     </div>
@@ -119,7 +124,7 @@
                 });
 
                 $('#userProcessTableBody').html(str);
-                
+                $('#deptHead').html(i[4])
             });
 
         });
