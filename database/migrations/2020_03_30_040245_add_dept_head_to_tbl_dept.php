@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateDeptsTable extends Migration
+class AddDeptHeadToTblDept extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,9 @@ class CreateDeptsTable extends Migration
      */
     public function up()
     {
-        Schema::create('tbl_dept', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->string('department_name',50);
-            $table->string('department_status',10)->default('ACTIVE');
+        Schema::table('tbl_dept', function (Blueprint $table) {
+            $table->string('department_head',10)->nullable();
+            $table->string('assistant_department_head',10)->nullable();
         });
     }
 
@@ -27,6 +26,8 @@ class CreateDeptsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('depts');
+        Schema::table('tbl_dept', function (Blueprint $table) {
+            //
+        });
     }
 }
