@@ -16,6 +16,7 @@ class AddDeptHeadToTblDept extends Migration
         Schema::table('tbl_dept', function (Blueprint $table) {
             $table->string('department_head',10)->nullable();
             $table->string('assistant_department_head',10)->nullable();
+            $table->integer('division_id',10)->nullable();
         });
     }
 

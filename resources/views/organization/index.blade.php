@@ -8,7 +8,7 @@
             <table class="table table-condensed table-responsive theme-bg theme-color" id="processTable"  style="font-size: .8em" width="100%">
                 <thead>
                     <tr id="filterRow">
-                        <th></th>
+                        <th><button>Chart</button></th>
                         <th></th>
                         <th></th>
                         <th hidden="true"></th>

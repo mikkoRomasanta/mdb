@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Process;
 use App\Models\EmployeeProcess;
+use App\Models\Division;
 use Illuminate\Http\Request;
 
 class ProcessController extends Controller
@@ -96,5 +97,17 @@ class ProcessController extends Controller
         $data = Process::get();
 
         return $data;
+    }
+
+    public function chart(){
+        $proc = Process::with(['division','department'])->get();
+        $div = Division::with('department')->get();
+        // return dd($div);
+        $data = [
+            'procs' => $proc,
+            'divs' => $div
+        ];
+
+        return view('organization.chart')->with($data);
     }
 }
