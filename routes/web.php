@@ -32,6 +32,7 @@ Route::middleware('admin')->group(function(){
     Route::get('userProcess/{id}','EmployeeController@getUserProcess')->name('get.userProcess');
     Route::get('getAllProcess','ProcessController@getAllProcess');
     Route::post('DeletUserProcess', 'EmployeeProcessController@deleteUserProcess')->name('del.userProcess');
+    Route::get('org-chart', 'ProcessController@chart');
 
     Route::resource('employeeProcess', 'EmployeeProcessController');
     Route::resource('apps', 'AppController');

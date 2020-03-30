@@ -8,16 +8,19 @@
             <table class="table table-condensed table-responsive theme-bg theme-color" id="processTable"  style="font-size: .8em" width="100%">
                 <thead>
                     <tr id="filterRow">
+                        <th><a class="btn btn-sm dt-button" href="org-chart">Chart</a></th>
                         <th></th>
                         <th></th>
-                        <th></th>
-                        <th></th>
+                        <th hidden="true"></th>
+                        <th hidden="true"></th>
                     </tr>
                     <tr>
                         <th>Action</th>
                         <th>Division</th>
                         <th>Department</th>
                         <th>Process</th>
+                        <th hidden="true">Dept Head</th>
+                        <th hidden="true">Div GM</th>
                     </tr>
                 </thead>
                 <tbody class="theme-color-rev">
@@ -27,6 +30,8 @@
                             <td>{{$org->division->division_name}}</td>
                             <td>{{$org->department->department_name}}</td>
                             <td>{{$org->process_name}}</td>
+                            <td hidden="true">{{$org->department->department_head}}</td>
+                            <td hidden="true">{{$org->division->gm}}</td>
                         </tr>
                     @endforeach
                 </tbody>
@@ -55,6 +60,16 @@
                     </thead>
                     <tbody id="userProcessTableBody"></tbody>
                 </table>
+            </div>
+            <div class="card-footer theme-bg-rev">
+                <div class="row">
+                    <div class="col-md-6">
+                        <small><strong class="theme-color-rev">Dept Head: </strong><span id="deptHead"></span></small>
+                    </div>
+                    <div class="col-md-6">
+                        <small><strong class="theme-color-rev">GM: </strong><span id="divGm"></span></small>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -119,7 +134,8 @@
                 });
 
                 $('#userProcessTableBody').html(str);
-                
+                $('#deptHead').html(i[4])
+                $('#divGm').html(i[5])
             });
 
         });
