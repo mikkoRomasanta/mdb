@@ -144,9 +144,15 @@ class EmployeeController extends Controller
         $user = Auth::user(); //get current logged-in user data
         $emp = Employee::where('emp_id','=',$user->emp_id)->first(); //use this for div and process
         $proc = EmployeeProcess::where('user_id',$user->id)->get();
+        $org = [];
+
         for($i=0;$i<$proc->count();$i++){
             $proc_id[$i] = $proc[$i]['process_id'];
             $org[$i] = Process::with('department','division')->where('id','=',$proc_id[$i])->first();
+        }
+
+        if(count($org) == 0){ //check if user has a process
+            $org = '';
         }
 
         $numOfReset = PasswordResets::where('emp_id','=',$user->emp_id)->where('reset','=',1)->orderBy('created_at','DESC')->count(); //count # of resets
