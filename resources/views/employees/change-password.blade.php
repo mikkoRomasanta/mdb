@@ -9,12 +9,15 @@
             <hr>
             <p><small><strong class="theme-color-rev">Name:</strong> {{$emp->first_name.' '.$emp->last_name}} </small></p>
             <p><small><strong class="theme-color-rev">Email:</strong> {{$emp->email}} </small></p>
-                <p><small><strong class="theme-color-rev">Division:</strong> {{$org[0]->division->division_name}} </small></p>
-                <p><small><strong class="theme-color-rev">Department:</strong> {{$org[0]->department->department_name}} </small></p>
+                <p><small><strong class="theme-color-rev">Division:</strong> {{$org[0]->division->division_name ?? 'N/A'}} </small></p>
+                <p><small><strong class="theme-color-rev">Department:</strong> {{$org[0]->department->department_name ?? 'N/A'}} </small></p>
                 <p><small><strong class="theme-color-rev">Process:</strong>
+                @if($org != '')
                     @foreach($org as $proc)
                         {{$proc->process_name}} <br>
                     @endforeach
+                    @else {{'N/A'}}
+                @endif
                     </small></p>
             <hr>
             <strong class="theme-color-rev">Accounts:</strong>
