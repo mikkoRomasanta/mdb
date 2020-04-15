@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Process;
 use App\Models\EmployeeProcess;
 use App\Models\Division;
+use App\Models\EmployeePosition;
+use App\Models\Employee;
 use Illuminate\Http\Request;
 
 class ProcessController extends Controller
@@ -100,14 +102,28 @@ class ProcessController extends Controller
     }
 
     public function chart(){
-        $proc = Process::with(['division','department'])->get();
-        $div = Division::with('department')->get();
-        // return dd($div);
+        $div = Division::get();
+        
         $data = [
-            'procs' => $proc,
             'divs' => $div
         ];
 
         return view('organization.chart')->with($data);
+    }
+
+    
+    public function getPositions($id){
+        $dh = EmployeePosition::with('employee')->where('org_id',$id)->where('position','=','DH')->first();
+        $adh = EmployeePosition::with('employee')->where('org_id',$id)->where('position','=','ADH')->first();
+        $gmId = Process::select('division_id')->where('department_id',$id)->first();
+        $gm = EmployeePosition::with('employee')->where('org_id',$gmId->division_id)->where('position','=','GM')->first();
+
+        $data = [
+            'dh' => $dh,
+            'adh' => $adh,
+            'gm' => $gm
+        ];
+
+        return $data;
     }
 }

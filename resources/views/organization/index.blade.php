@@ -31,7 +31,7 @@
                             <td>{{$org->department->department_name}}</td>
                             <td>{{$org->process_name}}</td>
                             <td hidden="true">{{$org->department->department_head}}</td>
-                            <td hidden="true">{{$org->division->gm}}</td>
+                            <td hidden="true"><input value="{{$org->department->id}}" id="deptId"></td>
                         </tr>
                     @endforeach
                 </tbody>
@@ -121,6 +121,9 @@
             var i =table.row( $(this).parents('tr') ).data();
             var x =$(this).closest('tr').find('#viewBtn');
             var id = $(x).val();
+            var dept = $(this).closest('tr').find('#deptId');
+            var deptId = $(dept).val();
+
             $('#usersLabel').html(i[3]);
             $('#process_id').val(id);
             $.get('{{url('organization')}}/' + id,function(data,status){
@@ -134,8 +137,13 @@
                 });
 
                 $('#userProcessTableBody').html(str);
-                $('#deptHead').html(i[4])
-                $('#divGm').html(i[5])
+                // $('#deptHead').html(i[4])
+                // $('#divGm').html(deptId);
+            });
+
+            $.get('{{url('position')}}/' + deptId,function(data,status){
+                $('#deptHead').html(data['dh']['employee']['first_name']+' '+data['dh']['employee']['last_name']);
+                $('#divGm').html(data['gm']['employee']['first_name']+' '+data['gm']['employee']['last_name']);
             });
 
         });
@@ -143,7 +151,7 @@
         $('#flexdata').flexdatalist({ //choose user to add to process
             minLength: 1,
             data: '{{url("empDataTable")}}',
-            searchIn: 'emp_id',
+            searchIn: ['emp_id','first_name','last_name'],
             valueProperty: 'id',
             visibleProperties: ['emp_id','first_name','last_name'],
             selectionRequired: true,
