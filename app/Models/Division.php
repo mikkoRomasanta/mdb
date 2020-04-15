@@ -9,4 +9,5 @@ class Division extends Model
     public $timestamps = false;
 
     protected $table = 'tbl_div';
+
 }

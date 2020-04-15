@@ -8,7 +8,7 @@
             <table class="table table-condensed table-responsive theme-bg theme-color" id="processTable"  style="font-size: .8em" width="100%">
                 <thead>
                     <tr id="filterRow">
-                        <th><a class="btn btn-sm dt-button" href="org-chart">Chart</a></th>
+                        <th><a hidden="true" class="btn btn-sm dt-button" href="org-chart">Chart</a></th>
                         <th></th>
                         <th></th>
                         <th hidden="true"></th>
@@ -142,8 +142,8 @@
             });
 
             $.get('{{url('position')}}/' + deptId,function(data,status){
-                $('#deptHead').html(data['dh']['employee']['first_name']+' '+data['dh']['employee']['last_name']);
                 $('#divGm').html(data['gm']['employee']['first_name']+' '+data['gm']['employee']['last_name']);
+                $('#deptHead').html(data['dh']['employee']['first_name']+' '+data['dh']['employee']['last_name']);
             });
 
         });
