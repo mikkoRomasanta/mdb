@@ -103,26 +103,29 @@ class ProcessController extends Controller
     }
 
     public function chart(){
-        $division = Division::get();
-        // $div = [];
-        // foreach($division as $key => $d){
-        //     $div['division_name'][$key] = $d->division_name;
-            
-        //     $deptId = Process::select('department_id')->where('division_id',$d->id)->get();
-            
-        //     foreach($deptId as $key2 => $dept){
-        //         return $dept;
-        //         if($dept != ''){
-        //             $department = Dept::where('id',$deptId)->first();
-        //             $div['division_name'][$key][$key2] = $department->id;
-        //         }
-        //     }
-        // }
-        // return $div;
-        
-        
+        $query = Division::with('department')->get();
+        $division = [];
+
+        foreach($query as $key => $div){
+            $division[$key]['div'] = $div->division_name; //get div name
+            $pos = EmployeePosition::with('employee')->where('org_id',$div->id)->where('position','=','GM')->first();
+            $name = $pos['employee']['first_name'].' '.$pos['employee']['last_name'];
+            $division[$key]['gm'] = $name;
+            if(count($div->department)){
+                foreach($div->department()->distinct()->get() as $key2 => $dept){
+                    $pos = EmployeePosition::with('employee')->where('org_id',$dept['id'])->where('position','=','DH')->first();
+                    $name = $pos['employee']['first_name'].' '.$pos['employee']['last_name'];
+                    $division[$key]['dept'][$key2]['dept'] = $dept->department_name; //get departments of div
+                    $division[$key]['dept'][$key2]['dh'] = $name;
+                 }
+            }
+            else{
+                $division[$key]['dept'][0]['dept'] = 'N/A'; } //if div has no dept. ex: president
+                $division[$key]['dept'][0]['dh'] = 'N/A';
+        }
+            // return dd($division);
         $data = [
-            'divs' => $division
+            'division' => $division
         ];
 
         return view('organization.chart')->with($data);

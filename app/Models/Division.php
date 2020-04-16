@@ -10,4 +10,7 @@ class Division extends Model
 
     protected $table = 'tbl_div';
 
+    public function department(){
+        return $this->hasManyThrough('App\Models\Dept','App\Models\Process','division_id','id','id','department_id');
+    }
 }
