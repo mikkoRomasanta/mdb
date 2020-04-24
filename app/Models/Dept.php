@@ -10,5 +10,7 @@ class Dept extends Model
 
     protected $table = 'tbl_dept';
 
-    
+    public function position(){
+        return $this->hasMany('App\Models\EmployeePosition','org_id','id');
+    }
 }

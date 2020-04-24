@@ -104,10 +104,17 @@ class ProcessController extends Controller
 
     public function chart(){
         $query = Division::with('department')->get();
+        $department = Dept::with(['position'  => function($q){
+            $q->where('position','=','DH');
+        }])->get(); //all departments with DH
+// return dd($department);
+// return $department;
         $division = [];
+        $deptdh = [];
 
         foreach($query as $key => $div){
             $division[$key]['div'] = $div->division_name; //get div name
+            $division[$key]['id'] = $div->id; //get div id
             $pos = EmployeePosition::with('employee')->where('org_id',$div->id)->where('position','=','GM')->first();
             $name = $pos['employee']['first_name'].' '.$pos['employee']['last_name'];
             $division[$key]['gm'] = $name;
@@ -123,9 +130,22 @@ class ProcessController extends Controller
                 $division[$key]['dept'][0]['dept'] = 'N/A'; } //if div has no dept. ex: president
                 $division[$key]['dept'][0]['dh'] = 'N/A';
         }
-            // return dd($division);
+            
+        foreach($department as $key3 => $d){
+            $deptdh[$key3]['dept'] = $d->department_name;
+            $deptdh[$key3]['id'] = $d->id;
+            if(isset($d->position[0])){
+                $dhId = $d->position[0]['user_id'];
+                $emp =  Employee::find($dhId);
+                $deptdh[$key3]['dh'] = $emp['first_name'].' '.$emp['last_name'];
+            }else{
+                $deptdh[$key3]['dh'] = 'N/A';
+            }
+        }
+        // return $deptdh;
         $data = [
-            'division' => $division
+            'division' => $division,
+            'department' => $deptdh
         ];
 
         return view('organization.chart')->with($data);

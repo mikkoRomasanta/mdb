@@ -161,14 +161,7 @@ class EmployeeController extends Controller
         if($dateOfLastChange == null){
             $dateOfLastChange['created_at'] = 'N/a'; 
         }
-
-        // return dd($dateOfLastChange);
-        // return dd($proc_id);
-        // $org = Process::with(['dept' => function ($q){$q->where('id','=',8);}])->where('id','=',$proc_id)->get();
-        // $org = Process::with('department','division')->where('id','=',$proc_id)->get();
-        // return dd($org);
-        // with(['itemStats' => function ($q) {$q->orderBy('id', 'desc');}])
-        // return dd($test2);
+        
         $plucked = App::pluckApps(); //get all available apps
         $apps = []; //array to display user's active apps
         foreach($plucked as $app){
