@@ -136,7 +136,7 @@ $(document).ready(function(){
                 'div_id':div_id,
             },
             success:function(data) {
-                alert('GM successfully added/repalced');
+                alert('GM successfully added/replaced');
                 location.reload();
             },
         });        
@@ -167,12 +167,14 @@ $(document).ready(function(){
                 'dept_id':dept_id,
             },
             success:function(data) {
-                alert('GM successfully added/repalced');
+                alert('GM successfully added/replaced');
                 location.reload();
             },
         });        
     });
 
+
 });
 </script>
+
 @endpush
