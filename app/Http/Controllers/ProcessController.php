@@ -127,8 +127,9 @@ class ProcessController extends Controller
                  }
             }
             else{
-                $division[$key]['dept'][0]['dept'] = 'N/A'; } //if div has no dept. ex: president
+                $division[$key]['dept'][0]['dept'] = 'N/A'; //if div has no dept. ex: president
                 $division[$key]['dept'][0]['dh'] = 'N/A';
+            }
         }
             
         foreach($department as $key3 => $d){
@@ -142,7 +143,7 @@ class ProcessController extends Controller
                 $deptdh[$key3]['dh'] = 'N/A';
             }
         }
-        // return $deptdh;
+        // return dd($division);
         $data = [
             'division' => $division,
             'department' => $deptdh
