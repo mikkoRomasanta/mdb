@@ -57,7 +57,7 @@ class EmployeeController extends Controller
         $emp->emp_id = $request->emp_id;
         $emp->first_name = $request->first_name;
         $emp->last_name = $request->last_name;
-        $emp->email = $request->last_name;
+        $emp->email = $request->email;
         $emp->role = $request->role;
 
         $emp->save();
