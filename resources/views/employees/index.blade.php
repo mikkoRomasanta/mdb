@@ -13,6 +13,7 @@
                         <th></th>
                         <th></th>
                         <th></th>
+                        <th></th>
                         @foreach($apps as $app)
                             <th></th>
                         @endforeach
@@ -20,6 +21,7 @@
                     <tr>
                         <th>Actions</th>
                         <th>Emp ID</th>
+                        <th>Global Id</th>
                         <th>Name</th>
                         <th>Last Name</th>
                         <th>Email</th>
@@ -67,6 +69,7 @@
                 var builtColumns = [ //column template to be used in DT
                     { "defaultContent": "<a href='#' class='btn btn-success btn-sm small-icon theme-btn' id='editBtn' title='edit'><i class='fas fa-edit fa-fw'></i></a> <a href='#' class='btn btn-warning btn-sm small-icon theme-btn-rev' id='resetBtn' title='reset password'><i class='fas fa-undo-alt fa-fw'></i></a>"},
                     {'data' : 'emp_id'},
+                    {'data' : 'global_id'},
                     {'data' : 'first_name'},
                     {'data' : 'last_name'},
                     {'data' : 'email'},
@@ -163,6 +166,7 @@
                         // console.log('My object: ', data);
                         $('#mdlTitle').html('Edit Employee: '+data.emp_id);
                         $('#empBox').val(data.emp_id);
+                        $('#gloBox').val(data.global_id);
                         $('#fnameBox').val(data.first_name);
                         $('#lnameBox').val(data.last_name);
                         $('#emailBox').val(data.email);

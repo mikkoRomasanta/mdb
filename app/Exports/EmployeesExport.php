@@ -10,7 +10,7 @@ use Maatwebsite\Excel\Concerns\WithHeadings;
 class EmployeesExport implements FromCollection, WithHeadings
 {
     public function headings(): array{
-        $headers = ['ID', 'Emp ID', 'First Name', 'Last Name', 'Email', 'Role', 'Status']; //set default headers
+        $headers = ['ID', 'Emp ID', 'Global ID','First Name', 'Last Name', 'Email', 'Role', 'Status']; //set default headers
         
         $apps = $apps = App::pluckApps();
         foreach($apps as $app){
@@ -22,7 +22,7 @@ class EmployeesExport implements FromCollection, WithHeadings
 
     public function collection()
     {
-        $data = ['id','emp_id','first_name','last_name','email','role','status']; //set default headers
+        $data = ['id','emp_id','global_id','first_name','last_name','email','role','status']; //set default headers
 
         $apps = $apps = App::pluckApps();
         $appCount = $apps->count(); //count # of apps
