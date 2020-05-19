@@ -14,6 +14,10 @@
                         {{Form::text('emp_id','',['id' => 'empBox', 'class' => 'col-md-8 form-control'])}}
                     </div>
                     <div class="form-group row">
+                        {{Form::label('global_id', 'Global ID',['class' => 'col-md-3 col-form-label', 'style' => 'font-weight: bold;'])}}
+                        {{Form::text('global_id','',['id' => 'gloBox', 'class' => 'col-md-8 form-control'])}}
+                    </div>
+                    <div class="form-group row">
                         {{Form::label('first_name', 'First Name',['class' => 'col-md-3 col-form-label', 'style' => 'font-weight: bold'])}}
                         {{Form::text('first_name','',['id' => 'fnameBox', 'class' => 'col-md-8 form-control'])}}
                     </div>

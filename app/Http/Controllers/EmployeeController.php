@@ -48,6 +48,7 @@ class EmployeeController extends Controller
     { 
         $validatedData = $request->validate([
             'emp_id' => 'required|max:10|unique:employees,emp_id',
+            'global_id' => 'nullable|max:10|unique:employees,global_id',
             'first_name' => 'required|max:255',
             'last_name' => 'required|max:255',
             'email' => 'nullable|max:255|email'
@@ -55,6 +56,7 @@ class EmployeeController extends Controller
 
         $emp = new Employee();
         $emp->emp_id = $request->emp_id;
+        $emp->global_id = $request->global_id;
         $emp->first_name = $request->first_name;
         $emp->last_name = $request->last_name;
         $emp->email = $request->email;
@@ -88,6 +90,7 @@ class EmployeeController extends Controller
     public function update(Request $request)
     {
         $validatedData = $request->validate([
+            'global_id' => 'nullable|max:10|unique:employees,global_id',
             'first_name' => 'required|max:255',
             'last_name' => 'required|max:255',
             'email' => 'nullable|max:255|email'
@@ -110,6 +113,7 @@ class EmployeeController extends Controller
         }
 
         $emp->emp_id = $request->emp_id; //should we allow changing of emp_id? emp_id is unique in the database
+        $emp->global_id = $request->global_id;
         $emp->first_name = $request->first_name;
         $emp->last_name = $request->last_name;
         $emp->email = $request->email;

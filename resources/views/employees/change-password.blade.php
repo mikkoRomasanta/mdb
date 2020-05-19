@@ -7,6 +7,7 @@
         <div class="col-md-3">
             <strong class="theme-color-rev">User : </strong>{{$emp->emp_id}}
             <hr>
+            <p><small><strong class="theme-color-rev">Global Id:</strong> {{$emp->global_id == null ? 'N/A' : $emp->global_id}} </small></p>
             <p><small><strong class="theme-color-rev">Name:</strong> {{$emp->first_name.' '.$emp->last_name}} </small></p>
             <p><small><strong class="theme-color-rev">Email:</strong> {{$emp->email}} </small></p>
                 <p><small><strong class="theme-color-rev">Division:</strong> {{$org[0]->division->division_name ?? 'N/A'}} </small></p>
