@@ -9,7 +9,7 @@
 
     <title>{{ config('app.name', 'Nerds') }}</title>
     
-    <link rel="icon" href="/images/icon-short.png"/>
+    <link rel="icon" href="public/images/icon-short.png"/>
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="{{asset('plugins/datatables/datatables.css')}}"/>
     {{-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/fixedcolumns/3.3.0/js/dataTables.fixedColumns.min.js"> --}}
@@ -34,7 +34,7 @@
             <nav class="navbar navbar-expand-md theme-bg theme-link shadow-sm p-0">
                 <div class="container">
                     <a class="navbar-brand p-0" href="{{ url('/') }}">
-                        <img src="/images/icon-short.png" width="70" height="50">
+                        <img src="public/images/icon-short.png" width="70" height="50">
                     </a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                         <span class="navbar-toggler-icon"></span>
