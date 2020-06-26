@@ -15,6 +15,7 @@ use Auth;
 use DB;
 use App\Exports\EmployeesExport;
 use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Str;
 
 class EmployeeController extends Controller
 {
@@ -217,7 +218,8 @@ class EmployeeController extends Controller
 
     public function resetPass(Request $request){
         $emp = Employee::findOrFail($request->id); //get selected user info
-        $pass = $request->reset_pass_base.$request->reset_pass_suffix; //combine pass + random 3 digit number
+        // $pass = $request->reset_pass_base.$request->reset_pass_suffix; //combine pass + random 3 digit number
+        $pass = Str::random(8);
         $emp->password  = Hash::make($pass);
         $emp->status = 'TEMP'; //TEMP = indicator that user has a temporary password.
         $emp->save();
@@ -230,8 +232,12 @@ class EmployeeController extends Controller
             return redirect('/employees')->with('success', $message);
         }
         else{
-                $emp->tempPass = $pass;
-            // $emp->notify(new ResetPassword($emp)); //send email notif. follow App\Notifications\ResetPassword;
+            $emp->tempPass = $pass;
+            $data = [
+                'emp' => $emp,
+                'pass' => $pass
+            ];
+            $emp->notify(new ResetPassword($data)); //send email notif. follow App\Notifications\ResetPassword;
 
             $message = 'Email sent to User ['.$request->emp_id.']';
             return redirect('/employees')->with('success', $message);
